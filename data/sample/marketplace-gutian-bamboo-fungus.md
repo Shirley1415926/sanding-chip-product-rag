@@ -1,6 +1,6 @@
 ---
 source: catalog/marketplace-gutian-bamboo-fungus.md
-source_url: http://localhost:8081/shop/
+source_url: https://txs.wyfdev.com/product/%e5%8f%a4%e7%94%b0%e7%ab%b9%e8%8d%aa%e5%b9%b2%e8%b4%a7/
 product_id: marketplace-gutian-bamboo-fungus
 product_name: 古田竹荪干货
 document_type: product

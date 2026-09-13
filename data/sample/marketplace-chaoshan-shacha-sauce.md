@@ -1,6 +1,6 @@
 ---
 source: catalog/marketplace-chaoshan-shacha-sauce.md
-source_url: http://localhost:8081/shop/
+source_url: https://txs.wyfdev.com/product/%e6%bd%ae%e6%b1%95%e6%b2%99%e8%8c%b6%e9%85%b1/
 product_id: marketplace-chaoshan-shacha-sauce
 product_name: 潮汕沙茶酱
 document_type: product

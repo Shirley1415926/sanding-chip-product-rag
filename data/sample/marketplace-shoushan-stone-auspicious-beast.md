@@ -1,6 +1,6 @@
 ---
 source: catalog/marketplace-shoushan-stone-auspicious-beast.md
-source_url: http://localhost:8081/shop/
+source_url: https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/
 product_id: marketplace-shoushan-stone-auspicious-beast
 product_name: 寿山石瑞兽摆件
 document_type: product

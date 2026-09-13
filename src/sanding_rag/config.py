@@ -32,6 +32,7 @@ class Settings:
     collection_name: str
     top_k: int
     min_relevance: float
+    evaluation_thresholds: tuple[float, ...]
 
     @classmethod
     def from_environment(cls, project_root: Path) -> "Settings":
@@ -50,5 +51,10 @@ class Settings:
             chroma_path=chroma_location,
             collection_name=os.getenv("COLLECTION_NAME", "sanding_product_knowledge"),
             top_k=int(os.getenv("TOP_K", "4")),
-            min_relevance=float(os.getenv("MIN_RELEVANCE", "0.45")),
+            min_relevance=float(os.getenv("MIN_RELEVANCE", "0.60")),
+            evaluation_thresholds=tuple(
+                float(value.strip())
+                for value in os.getenv("EVALUATION_THRESHOLDS", "0.30,0.45,0.60,0.70").split(",")
+                if value.strip()
+            ),
         )

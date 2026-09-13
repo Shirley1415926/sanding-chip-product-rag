@@ -1,6 +1,6 @@
 ---
 source: catalog/marketplace-hot-pot-base-gift-box.md
-source_url: http://localhost:8081/shop/
+source_url: https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/
 product_id: marketplace-hot-pot-base-gift-box
 product_name: 正宗火锅底料礼盒
 document_type: product

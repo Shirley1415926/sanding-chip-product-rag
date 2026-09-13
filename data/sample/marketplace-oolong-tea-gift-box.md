@@ -1,6 +1,6 @@
 ---
 source: catalog/marketplace-oolong-tea-gift-box.md
-source_url: http://localhost:8081/shop/
+source_url: https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/
 product_id: marketplace-oolong-tea-gift-box
 product_name: 乌龙茶叶礼盒
 document_type: product

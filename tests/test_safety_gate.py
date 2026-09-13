@@ -30,6 +30,17 @@ class SafetyGateTests(unittest.TestCase):
     def test_final_quote_question_is_handed_off(self) -> None:
         self.assertEqual(self.gate.blocked_reason("请给我最终报价"), "final_quote")
 
+    def test_keyword_evasion_for_stock_price_and_lead_time_is_handed_off(self) -> None:
+        self.assertEqual(self.gate.blocked_reason("这个商品还能下单吗？"), "inventory")
+        self.assertEqual(self.gate.blocked_reason("竹荪这周能出库吗？"), "real_time_lead_time")
+        self.assertEqual(self.gate.blocked_reason("买一箱能便宜多少？"), "non_public_price")
+
+    def test_unpublished_cooperation_rules_are_handed_off(self) -> None:
+        self.assertEqual(
+            self.gate.blocked_reason("供应商入驻要提供哪些资质，审核多久？"),
+            "unpublished_cooperation_rules",
+        )
+
     def test_static_spec_question_can_retrieve(self) -> None:
         self.assertIsNone(self.gate.blocked_reason("这个型号的供电范围是多少？"))
 

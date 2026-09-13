@@ -1,6 +1,6 @@
 ---
 source: catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md
-source_url: http://localhost:8081/shop/
+source_url: https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/
 product_id: marketplace-jingdezhen-blue-white-high-foot-cup
 product_name: 景德镇青花高足杯
 document_type: product

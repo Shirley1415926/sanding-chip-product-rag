@@ -18,7 +18,7 @@ class MarkdownLoaderAndSplitterTests(unittest.TestCase):
             path.write_text(
                 """---
 source: sample/product.md
-source_url: http://localhost:8081/shop/
+source_url: https://txs.wyfdev.com/product/test/
 product_id: marketplace-test
 document_type: product
 updated_at: 2026-09-13
@@ -34,7 +34,7 @@ updated_at: 2026-09-13
         self.assertGreater(len(chunks), 1)
         for chunk in chunks:
             self.assertEqual(chunk.metadata["source"], "sample/product.md")
-            self.assertEqual(chunk.metadata["source_url"], "http://localhost:8081/shop/")
+            self.assertEqual(chunk.metadata["source_url"], "https://txs.wyfdev.com/product/test/")
             self.assertEqual(chunk.metadata["product_id"], "marketplace-test")
             self.assertEqual(chunk.metadata["document_type"], "product")
             self.assertEqual(chunk.metadata["updated_at"], "2026-09-13")
@@ -42,7 +42,7 @@ updated_at: 2026-09-13
     def test_missing_required_metadata_fails_before_ingestion(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_dir:
             path = Path(temporary_dir) / "broken.md"
-            path.write_text("---\nsource: x.md\nsource_url: http://localhost:8081/shop/\n---\n# 文本", encoding="utf-8")
+            path.write_text("---\nsource: x.md\nsource_url: https://txs.wyfdev.com/product/test/\n---\n# 文本", encoding="utf-8")
             with self.assertRaises(MetadataValidationError):
                 load_markdown(path)
 

@@ -1,6 +1,6 @@
 ---
 source: catalog/marketplace-linglong-porcelain-dinnerware.md
-source_url: http://localhost:8081/shop/
+source_url: https://txs.wyfdev.com/product/%e7%8e%b2%e7%8f%91%e7%93%b7%e9%a4%90%e5%85%b7%e5%a5%97%e8%a3%85/
 product_id: marketplace-linglong-porcelain-dinnerware
 product_name: 玲珑瓷餐具套装
 document_type: product

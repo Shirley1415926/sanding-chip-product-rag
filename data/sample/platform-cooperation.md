@@ -1,6 +1,6 @@
 ---
 source: catalog/platform-cooperation.md
-source_url: http://localhost:8081/
+source_url: https://txs.wyfdev.com/cooperation-apply/
 product_id: GENERAL
 product_name: 平台合作说明
 document_type: policy
