@@ -20,6 +20,7 @@
 5. 可配置检索：默认 Dense（BGE + Chroma）；确定性中文 BM25 保留商品名、数字、单位和规格；Hybrid 使用 rank-only RRF 融合两路名次。
 6. 问答编排：硬安全门 → Top-K 检索与阈值门 → 上下文受限 LLM → 统一来源（含 `source_url`）输出。
 7. CLI、商城目录资料、18 题回归验收、32 题安全保留评估，以及 27 题检索压力集脚本。
+8. 显式真实 LLM 生成质量评估：26 道独立题、逐题回答/证据/耗时追踪、规则化逐维检查和人工复核工作清单；普通测试与 CI 不调用 API。
 
 ### 明确不做
 
@@ -63,6 +64,8 @@ question
 生产 Embedding 是 `SentenceTransformerEmbedder`（默认 `BAAI/bge-small-zh-v1.5`）；LLM 是 `OpenAICompatibleLLM`，通过 `LLM_API_BASE`、`LLM_API_KEY`、`LLM_MODEL` 对接任一 Chat Completions 兼容端点。测试模式通过依赖注入提供 `HashingTestEmbedder` 和 `ContextEchoLLM`，绝不把测试后端伪装成生产语义模型。
 
 Chroma collection 使用 cosine 空间，Dense 分数为 `1 - distance`。默认 `TOP_K=4`、`MIN_RELEVANCE=0.60`、`RETRIEVAL_MODE=dense`，由环境变量调节；`RRF_K=60` 与 `RRF_CANDIDATE_DEPTH=12` 只在 Hybrid RRF 生效；`EVALUATION_THRESHOLDS` 配置离线候选值。BM25 原始分只用于 BM25 排序，映射到 0–1 置信度接入同一相关性门；Hybrid 的排序只按 RRF 名次融合，置信度不参与融合。当前 0.60 来自独立 32 题保留集的比较，不使用 18 题回归集调节；详见 `docs/EVALUATION_REPORT.md`。三模式对照没有显示 Hybrid 质量收益，详见 `docs/HYBRID_RETRIEVAL_EXPERIMENT.md`。生产上线前仍需以审核后的真实问答记录再次验证。
+
+真实生成评估脚本只从本地 `.env` 读取 `LLM_API_BASE`、`LLM_API_KEY` 和 `LLM_MODEL`，且必须显式执行，不能由单元测试或 CI 触发。它固定验证 Dense 与 0.60 阈值；对每题记录答案、来源、Top-K 证据、模型名、耗时、硬安全门和是否到达 LLM 边界。自动检查仅基于问题、检索证据、最终回答与预期要点，分别报告忠实度、相关性、完整性、来源正确性和安全合规；它不调用 LLM Judge，也不是绝对真相。所有自动失败题和确定性抽取的至少 20% 自动通过题必须人工复核。模型回答在写入追踪前会掩盖常见 API Key、邮箱和手机号模式。详见 `docs/GENERATION_EVALUATION_REPORT.md`。
 
 ## 6. 安全控制
 

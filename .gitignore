@@ -26,6 +26,7 @@ data/chroma/
 data/runtime/
 data/models/
 data/model_cache/
+data/generation_evaluation_manual_review*.json
 *.sqlite
 *.sqlite3
 *.db

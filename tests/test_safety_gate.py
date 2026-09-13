@@ -20,6 +20,15 @@ class _EmptyStore:
         return []
 
 
+class _FailIfCalledLLM:
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def answer(self, question: str, context: str, handoff_message: str) -> str:
+        self.calls += 1
+        raise AssertionError("hard safety gate must return before the LLM boundary")
+
+
 class SafetyGateTests(unittest.TestCase):
     def setUp(self) -> None:
         self.gate = SafetyGate()
@@ -53,6 +62,17 @@ class SafetyGateTests(unittest.TestCase):
         self.assertTrue(payload.handoff_required)
         self.assertEqual(payload.answer, HANDOFF_MESSAGE)
         self.assertEqual(payload.sources, [])
+
+    def test_hard_safety_gate_never_calls_llm(self) -> None:
+        llm = _FailIfCalledLLM()
+        payload = RAGAnswerService(
+            embedder=_NoopEmbedder(),
+            store=_EmptyStore(),  # type: ignore[arg-type]
+            llm=llm,  # type: ignore[arg-type]
+        ).ask("潮汕沙茶酱现在有多少库存，今天能发吗？")
+        self.assertTrue(payload.handoff_required)
+        self.assertEqual(payload.handoff_reason, "inventory")
+        self.assertEqual(llm.calls, 0)
 
 
 if __name__ == "__main__":

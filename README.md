@@ -59,13 +59,20 @@ python scripts/run_offline_evaluation.py
 # 运行独立的 27 题检索压力集，对照 Dense、BM25 和 rank-only RRF
 python scripts/run_retrieval_stress.py
 
+# 真实 LLM 回答质量评估：仅生成不调用 API 的透明准备报告
+python scripts/run_generation_evaluation.py --prepare-only
+
+# 显式真实评估：仅从本地 .env 读取 LLM_API_BASE、LLM_API_KEY、LLM_MODEL
+# 不属于普通单元测试或 CI，运行后还须完成脚本标记的人工复核。
+python scripts/run_generation_evaluation.py
+
 # 基础单元测试（标准库 unittest）
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
 ## 测试集与当前结果
 
-`data/test_questions.json` 含 18 道商城目录回归验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **16/16 通过**。
+`data/test_questions.json` 含 18 道商城目录回归验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **25/25 通过**。
 
 阈值不使用这 18 题调节，而使用独立的 32 题保留集。实际语义评估后，暂用 `MIN_RELEVANCE=0.60`：Source Hit@1/Hit@3 为 17/17，错误回答率为 0/32，正确转人工率为 15/15，串商品错误为 0。阈值对比和失败用例见 [EVALUATION_REPORT.md](docs/EVALUATION_REPORT.md)，完整逐题记录见 [EVALUATION_TRACES.json](docs/EVALUATION_TRACES.json)。
 
@@ -73,10 +80,13 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 另有独立的 27 题检索压力集，使用真实 BGE 比较 Dense、确定性中文 BM25 和 rank-only RRF：三者均为 Hit@1/Hit@3/MRR 100%、串商品 0，未出现 Hybrid 的明确质量收益，因此 `RETRIEVAL_MODE` 默认继续为 `dense`。完整方法、延迟和局限见 [HYBRID_RETRIEVAL_EXPERIMENT.md](docs/HYBRID_RETRIEVAL_EXPERIMENT.md)。
 
+`data/generation_evaluation_questions.json` 是独立的 26 题最终回答质量集，不修改也不参与 18 题回归、32 题安全或 27 题检索压力集。它同时检查公开商品回答与必须转人工的问题；显式脚本记录最终答案、检索证据、模型名、耗时、逐维规则结果，并选取所有失败题和至少 20% 自动通过题供人工复核。当前工作区没有 `.env` 的真实模型配置，因此最新报告处于 **not_run** 状态，不含虚构的模型指标或人工结论；见 [GENERATION_EVALUATION_REPORT.md](docs/GENERATION_EVALUATION_REPORT.md)。
+
 ## 已知限制
 
 - `MIN_RELEVANCE=0.60` 是当前小型保留集上的暂用值，不是长期固定阈值；资料、模型或流量分布变化后需要重跑保留评估。明确属性保护仍是保守词表，而非通用字段级事实验证。
 - BM25 与 RRF 仅作为可配置的离线对照实现，未因本次实验改为默认；尚未实现 Rerank、MCP、多模态、Dashboard 或复杂评测体系。
+- 真实 LLM 生成评估只能在本地 `.env` 已配置时显式运行；自动规则不是 LLM Judge 或绝对真相，完成全部失败题和 20% 通过题的人工复核前，不能判定达到独立演示门槛。
 - 当前硬规则会把库存、具体/实时交期、订单级/批量/经销报价，以及食品保质期、配料、过敏原转人工；“微波炉”只在命中明确写有该事实的商品资料时回答。
 - 公开展示价不是经销价、批量价或订单级最终报价。任何未被当前资料覆盖的信息一律转人工。
 
@@ -88,6 +98,7 @@ data/sample/          10 份商城商品资料 + 平台合作说明
 data/test_questions.json  18 道商城目录验收题
 data/holdout_evaluation_questions.json  32 道独立离线保留题
 data/retrieval_stress_questions.json  27 道独立检索压力题
+data/generation_evaluation_questions.json  26 道独立真实生成质量题
 docs/                 产品、技术规格、模块设计与验收报告
 scripts/              可重复验收脚本
 tests/                轻量单元测试

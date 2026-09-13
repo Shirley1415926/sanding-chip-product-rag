@@ -1,0 +1,1080 @@
+{
+  "status": "not_run",
+  "reason": "prepare-only：未读取 .env，也未调用真实 LLM",
+  "run_at": "2026-09-13T18:52:29+08:00",
+  "dataset": "data/generation_evaluation_questions.json",
+  "dataset_case_count": 26,
+  "model": null,
+  "retrieval_mode": "dense",
+  "min_relevance": 0.6,
+  "traces": [
+    {
+      "case_id": "G01",
+      "category": "公开商品信息",
+      "query": "把三坊七巷主题福州软木画已公开的产地、礼盒形式和页面标价整理成一句话。",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "origin",
+            "accepted_values": [
+              "福建福州"
+            ]
+          },
+          {
+            "id": "packaging",
+            "accepted_values": [
+              "单件礼盒"
+            ]
+          },
+          {
+            "id": "display_price",
+            "accepted_values": [
+              "¥328",
+              "328元",
+              "328 元"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-cork-painting-sanfangqixiang.md"
+        ],
+        "required_product_ids": [
+          "marketplace-cork-painting-sanfangqixiang"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G02",
+      "category": "公开商品信息",
+      "query": "乌龙茶叶礼盒来自哪个茶产区？每罐净含量和礼盒组合分别是什么？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "origin",
+            "accepted_values": [
+              "福建茶产区"
+            ]
+          },
+          {
+            "id": "unit_weight",
+            "accepted_values": [
+              "100g/罐",
+              "100g一罐",
+              "100g/每罐"
+            ]
+          },
+          {
+            "id": "packaging",
+            "accepted_values": [
+              "双罐礼盒",
+              "两罐礼盒"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-oolong-tea-gift-box.md"
+        ],
+        "required_product_ids": [
+          "marketplace-oolong-tea-gift-box"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G03",
+      "category": "公开商品信息",
+      "query": "古田竹荪干货的公开单袋规格和整箱数量各是多少？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "unit_weight",
+            "accepted_values": [
+              "80g/袋",
+              "80g一袋"
+            ]
+          },
+          {
+            "id": "carton",
+            "accepted_values": [
+              "20袋/箱",
+              "20 袋/箱",
+              "20袋一箱"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-gutian-bamboo-fungus.md"
+        ],
+        "required_product_ids": [
+          "marketplace-gutian-bamboo-fungus"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G04",
+      "category": "公开商品信息",
+      "query": "景德镇青花高足杯的公开产地、礼盒杯数和定制提示是什么？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "origin",
+            "accepted_values": [
+              "江西景德镇"
+            ]
+          },
+          {
+            "id": "packaging",
+            "accepted_values": [
+              "双杯礼盒",
+              "两杯礼盒"
+            ]
+          },
+          {
+            "id": "customization",
+            "accepted_values": [
+              "支持定制"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md"
+        ],
+        "required_product_ids": [
+          "marketplace-jingdezhen-blue-white-high-foot-cup"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G05",
+      "category": "公开商品信息",
+      "query": "景德镇青花龙纹瓷盘按公开资料是怎样礼盒包装，最低订购数量如何写？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "packaging",
+            "accepted_values": [
+              "单件礼盒"
+            ]
+          },
+          {
+            "id": "minimum_order",
+            "accepted_values": [
+              "10件起订",
+              "10 件起订"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md"
+        ],
+        "required_product_ids": [
+          "marketplace-jingdezhen-blue-white-dragon-plate"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G06",
+      "category": "公开商品信息",
+      "query": "玲珑瓷餐具套装写明的套装数量、材质和使用提示分别是什么？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "set_size",
+            "accepted_values": [
+              "56头套装",
+              "56 头套装"
+            ]
+          },
+          {
+            "id": "material",
+            "accepted_values": [
+              "骨瓷"
+            ]
+          },
+          {
+            "id": "microwave",
+            "accepted_values": [
+              "微波炉适用",
+              "适用于微波炉"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-linglong-porcelain-dinnerware.md"
+        ],
+        "required_product_ids": [
+          "marketplace-linglong-porcelain-dinnerware"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G07",
+      "category": "公开商品信息",
+      "query": "福州脱胎漆器流纹花瓶摆件的产地与对外展示的包装形式是什么？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "origin",
+            "accepted_values": [
+              "福建福州"
+            ]
+          },
+          {
+            "id": "packaging",
+            "accepted_values": [
+              "单件礼盒"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md"
+        ],
+        "required_product_ids": [
+          "marketplace-fuzhou-bodiless-lacquer-vase"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G08",
+      "category": "公开商品信息",
+      "query": "正宗火锅底料礼盒的产地、袋数和每袋重量怎样介绍？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "origin",
+            "accepted_values": [
+              "四川成都"
+            ]
+          },
+          {
+            "id": "bag_count",
+            "accepted_values": [
+              "4袋礼盒",
+              "4 袋礼盒"
+            ]
+          },
+          {
+            "id": "unit_weight",
+            "accepted_values": [
+              "200g",
+              "200 g"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-hot-pot-base-gift-box.md"
+        ],
+        "required_product_ids": [
+          "marketplace-hot-pot-base-gift-box"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G09",
+      "category": "公开商品信息",
+      "query": "潮汕沙茶酱公开资料中的产地和单瓶规格是什么？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "origin",
+            "accepted_values": [
+              "广东潮汕"
+            ]
+          },
+          {
+            "id": "unit_weight",
+            "accepted_values": [
+              "300g/瓶",
+              "300g一瓶"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-chaoshan-shacha-sauce.md"
+        ],
+        "required_product_ids": [
+          "marketplace-chaoshan-shacha-sauce"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G10",
+      "category": "公开商品信息",
+      "query": "寿山石瑞兽摆件公开标注的具体产地和礼盒形式分别是什么？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "origin",
+            "accepted_values": [
+              "福州晋安区寿山乡"
+            ]
+          },
+          {
+            "id": "packaging",
+            "accepted_values": [
+              "单件礼盒"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-shoushan-stone-auspicious-beast.md"
+        ],
+        "required_product_ids": [
+          "marketplace-shoushan-stone-auspicious-beast"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G11",
+      "category": "跨商品比较",
+      "query": "软木画和乌龙茶叶礼盒各自的公开展示价是多少？请分开说明，不要当作经销价。",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "cork_price",
+            "accepted_values": [
+              "¥328",
+              "328元",
+              "328 元"
+            ]
+          },
+          {
+            "id": "tea_price",
+            "accepted_values": [
+              "¥128",
+              "128元",
+              "128 元"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-cork-painting-sanfangqixiang.md",
+          "catalog/marketplace-oolong-tea-gift-box.md"
+        ],
+        "required_product_ids": [
+          "marketplace-cork-painting-sanfangqixiang",
+          "marketplace-oolong-tea-gift-box"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G12",
+      "category": "跨商品比较",
+      "query": "青花高足杯和青花龙纹瓷盘的礼盒配置有何不同？其中哪个写了起订量？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "cup_packaging",
+            "accepted_values": [
+              "双杯礼盒",
+              "两杯礼盒"
+            ]
+          },
+          {
+            "id": "plate_packaging",
+            "accepted_values": [
+              "单件礼盒"
+            ]
+          },
+          {
+            "id": "minimum_order",
+            "accepted_values": [
+              "10件起订",
+              "10 件起订"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+          "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md"
+        ],
+        "required_product_ids": [
+          "marketplace-jingdezhen-blue-white-high-foot-cup",
+          "marketplace-jingdezhen-blue-white-dragon-plate"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G13",
+      "category": "自然语言选品",
+      "query": "我想挑一份福建干制食材礼品，条件是单袋80g且整箱20袋；应看哪款公开资料？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "product",
+            "accepted_values": [
+              "古田竹荪干货"
+            ]
+          },
+          {
+            "id": "unit_weight",
+            "accepted_values": [
+              "80g/袋",
+              "80g一袋"
+            ]
+          },
+          {
+            "id": "carton",
+            "accepted_values": [
+              "20袋/箱",
+              "20 袋/箱",
+              "20袋一箱"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-gutian-bamboo-fungus.md"
+        ],
+        "required_product_ids": [
+          "marketplace-gutian-bamboo-fungus"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G14",
+      "category": "自然语言选品",
+      "query": "如果要找景德镇出产、双杯礼盒且资料写明支持定制的礼物，应该推荐什么？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "product",
+            "accepted_values": [
+              "景德镇青花高足杯"
+            ]
+          },
+          {
+            "id": "origin",
+            "accepted_values": [
+              "江西景德镇"
+            ]
+          },
+          {
+            "id": "customization",
+            "accepted_values": [
+              "支持定制"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md"
+        ],
+        "required_product_ids": [
+          "marketplace-jingdezhen-blue-white-high-foot-cup"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G15",
+      "category": "自然语言选品",
+      "query": "需要一套公开写明可用于微波炉的景德镇餐具，资料中能确认的套装数量是多少？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "product",
+            "accepted_values": [
+              "玲珑瓷餐具套装"
+            ]
+          },
+          {
+            "id": "set_size",
+            "accepted_values": [
+              "56头套装",
+              "56 头套装"
+            ]
+          },
+          {
+            "id": "microwave",
+            "accepted_values": [
+              "微波炉适用",
+              "适用于微波炉"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-linglong-porcelain-dinnerware.md"
+        ],
+        "required_product_ids": [
+          "marketplace-linglong-porcelain-dinnerware"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G16",
+      "category": "平台公开入口",
+      "query": "商城公开列出了哪些面向供应商、经销商和批量采购的合作入口？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "supplier",
+            "accepted_values": [
+              "供应商入驻入口"
+            ]
+          },
+          {
+            "id": "dealer",
+            "accepted_values": [
+              "经销商申请入口"
+            ]
+          },
+          {
+            "id": "dealer_price",
+            "accepted_values": [
+              "经销价"
+            ]
+          },
+          {
+            "id": "procurement",
+            "accepted_values": [
+              "专属采购入口"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/platform-cooperation.md"
+        ],
+        "required_product_ids": [
+          "GENERAL"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G17",
+      "category": "公开商品信息",
+      "query": "只根据公开目录，哪款四川地方特产是四袋装礼盒，而且每袋标为200g？",
+      "expected": {
+        "must_handoff": false,
+        "expected_answer_points": [
+          {
+            "id": "product",
+            "accepted_values": [
+              "正宗火锅底料礼盒"
+            ]
+          },
+          {
+            "id": "origin",
+            "accepted_values": [
+              "四川成都"
+            ]
+          },
+          {
+            "id": "unit_weight",
+            "accepted_values": [
+              "200g",
+              "200 g"
+            ]
+          }
+        ],
+        "required_sources": [
+          "catalog/marketplace-hot-pot-base-gift-box.md"
+        ],
+        "required_product_ids": [
+          "marketplace-hot-pot-base-gift-box"
+        ]
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G18",
+      "category": "库存与即时履约",
+      "query": "潮汕沙茶酱现在有多少现货，今天能不能立即寄出？",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G19",
+      "category": "实时交期",
+      "query": "我今天订景德镇青花高足杯，具体哪天可以发货并送达？",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G20",
+      "category": "最终报价",
+      "query": "请直接确认三坊七巷主题福州软木画这次订单的最终价格。",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G21",
+      "category": "批量报价",
+      "query": "乌龙茶叶礼盒采购一百份能给出什么批量单价？",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G22",
+      "category": "经销报价",
+      "query": "寿山石瑞兽摆件给经销商的拿货价是多少？",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G23",
+      "category": "食品资料缺口",
+      "query": "潮汕沙茶酱的详细配料表和致敏物质分别有哪些？",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G24",
+      "category": "食品资料缺口",
+      "query": "正宗火锅底料礼盒的保质期能保存多长时间？",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G25",
+      "category": "未公开认证",
+      "query": "玲珑瓷餐具套装获得过哪些官方质量认证？",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    },
+    {
+      "case_id": "G26",
+      "category": "未公开定制范围",
+      "query": "景德镇青花高足杯的定制范围是否包含刻字或专属图案？",
+      "expected": {
+        "must_handoff": true,
+        "expected_answer_points": [],
+        "required_sources": [],
+        "required_product_ids": []
+      },
+      "final_answer": null,
+      "handoff_required": null,
+      "handoff_reason": null,
+      "llm_called": false,
+      "retrieval_sources": [],
+      "returned_sources": [],
+      "model": null,
+      "elapsed_ms": null,
+      "evaluation": null,
+      "manual_review": {
+        "required": false,
+        "status": "not_run",
+        "decision": null,
+        "notes": "真实 LLM 评估尚未运行"
+      }
+    }
+  ]
+}
