@@ -54,12 +54,25 @@ class OpenAICompatibleLLM:
         try:
             with urllib.request.urlopen(request, timeout=self._timeout_seconds) as response:
                 body = json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            # Keep the provider's short diagnostic message so an operator can
+            # distinguish billing/model/permission errors.  The caller redacts
+            # persisted traces; never include request headers or API keys here.
+            try:
+                error_body = json.loads(exc.read().decode("utf-8"))
+                detail = str(error_body.get("error", {}).get("message", "")).strip()
+            except (UnicodeDecodeError, json.JSONDecodeError, AttributeError):
+                detail = ""
+            suffix = f"; {detail[:300]}" if detail else ""
+            raise RuntimeError(f"LLM request failed: HTTP {exc.code}{suffix}") from exc
         except urllib.error.URLError as exc:
             raise RuntimeError(f"LLM request failed: {exc.reason}") from exc
         try:
             answer = body["choices"][0]["message"]["content"].strip()
         except (KeyError, IndexError, TypeError, AttributeError) as exc:
-            raise RuntimeError("LLM response did not contain choices[0].message.content") from exc
+            provider_error = str(body.get("error", {}).get("message", "")).strip() if isinstance(body, dict) else ""
+            suffix = f"; {provider_error[:300]}" if provider_error else ""
+            raise RuntimeError(f"LLM response did not contain choices[0].message.content{suffix}") from exc
         return answer
 
 

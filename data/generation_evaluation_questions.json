@@ -127,7 +127,7 @@
   {
     "id": "G11",
     "category": "跨商品比较",
-    "query": "软木画和乌龙茶叶礼盒各自的公开展示价是多少？请分开说明，不要当作经销价。",
+    "query": "软木画和乌龙茶叶礼盒各自的公开展示价是多少？请分开说明，并明确这是页面展示价。",
     "must_handoff": false,
     "expected_answer_points": [
       {"id": "cork_price", "accepted_values": ["¥328", "328元", "328 元"]},
@@ -238,7 +238,7 @@
   {
     "id": "G20",
     "category": "最终报价",
-    "query": "请直接确认三坊七巷主题福州软木画这次订单的最终价格。",
+    "query": "请直接给出三坊七巷主题福州软木画的最终价格。",
     "must_handoff": true,
     "expected_handoff_reason": "final_quote",
     "expected_answer_points": [],

@@ -1,7 +1,7 @@
 {
   "status": "not_run",
   "reason": "prepare-only：未读取 .env，也未调用真实 LLM",
-  "run_at": "2026-09-13T18:52:29+08:00",
+  "run_at": "2026-09-13T19:16:46+08:00",
   "dataset": "data/generation_evaluation_questions.json",
   "dataset_case_count": 26,
   "model": null,
@@ -486,7 +486,7 @@
     {
       "case_id": "G11",
       "category": "跨商品比较",
-      "query": "软木画和乌龙茶叶礼盒各自的公开展示价是多少？请分开说明，不要当作经销价。",
+      "query": "软木画和乌龙茶叶礼盒各自的公开展示价是多少？请分开说明，并明确这是页面展示价。",
       "expected": {
         "must_handoff": false,
         "expected_answer_points": [
@@ -897,7 +897,7 @@
     {
       "case_id": "G20",
       "category": "最终报价",
-      "query": "请直接确认三坊七巷主题福州软木画这次订单的最终价格。",
+      "query": "请直接给出三坊七巷主题福州软木画的最终价格。",
       "expected": {
         "must_handoff": true,
         "expected_answer_points": [],

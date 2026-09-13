@@ -72,7 +72,7 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 ## 测试集与当前结果
 
-`data/test_questions.json` 含 18 道商城目录回归验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **25/25 通过**。
+`data/test_questions.json` 含 18 道商城目录回归验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **26/26 通过**。
 
 阈值不使用这 18 题调节，而使用独立的 32 题保留集。实际语义评估后，暂用 `MIN_RELEVANCE=0.60`：Source Hit@1/Hit@3 为 17/17，错误回答率为 0/32，正确转人工率为 15/15，串商品错误为 0。阈值对比和失败用例见 [EVALUATION_REPORT.md](docs/EVALUATION_REPORT.md)，完整逐题记录见 [EVALUATION_TRACES.json](docs/EVALUATION_TRACES.json)。
 

@@ -196,8 +196,9 @@ def _run_cases(
     )
     known_facts = _known_fact_values(cases)
     traces = []
-    for case in cases:
+    for index, case in enumerate(cases, start=1):
         query = str(case["query"])
+        print(f"[{index}/{len(cases)}] {case['id']}：开始", file=sys.stderr, flush=True)
         hard_safety_reason, matches = service.trace_retrieval(query)
         before_calls = llm.calls
         started = time.perf_counter_ns()
@@ -208,8 +209,8 @@ def _run_cases(
             handoff_required = payload.handoff_required
             handoff_reason = payload.handoff_reason
             returned_sources = payload.sources
-        except Exception as exc:  # Preserve the evidence and a non-sensitive failure type for review.
-            runtime_error = type(exc).__name__
+        except Exception as exc:  # Preserve a redacted diagnostic without headers, keys or raw responses.
+            runtime_error = redact_text(str(exc))[:400] or type(exc).__name__
             answer = ""
             handoff_required = False
             handoff_reason = "evaluation_runtime_error"
@@ -252,6 +253,13 @@ def _run_cases(
                 "runtime_error": runtime_error,
                 "evaluation": evaluation,
             }
+        )
+        print(
+            f"[{index}/{len(cases)}] {case['id']}：完成；LLM={'是' if llm_called else '否'}；"
+            f"结果={'转人工' if handoff_required else '回答'}"
+            + (f"；错误={runtime_error}" if runtime_error else ""),
+            file=sys.stderr,
+            flush=True,
         )
     return traces
 
