@@ -74,6 +74,10 @@ python scripts/run_generation_evaluation.py
 python scripts/apply_generation_manual_review.py \
   --review-file data/runtime/generation_evaluation/manual_review.json
 
+# 对已完成真实运行的本地 trace 做离线证据口径校准；不覆盖父运行，
+# 不读取 .env、不初始化 Embedding，也不调用 LLM 或网络。
+python scripts/recalibrate_generation_evaluation.py
+
 # 基础单元测试（标准库 unittest）
 PYTHONPATH=src python -m unittest discover -s tests -v
 ```
@@ -90,13 +94,13 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 `data/generation_evaluation_questions.json` 是独立的 26 题最终回答质量集，不修改也不参与 18 题回归、32 题安全或 27 题检索压力集。它同时检查公开商品回答与必须转人工的问题；显式脚本记录最终答案、完整 Top-K `retrieval_sources`、模型验证后的 `returned_sources`、模型名、耗时和逐维规则结果。`product_id` 仅保留在后端匹配与调试 trace，绝不进入模型上下文、最终回答或用户可见来源。模型的无效 JSON 或无效 `used_source_ids` 是可评估的单题 badcase；API、网络、认证、超时或提供方响应故障则会中止整轮运行，绝不会写成 `completed` 或生成质量结论。
 
-来源绑定修复后的第二轮本地 DeepSeek 运行已完成并经人工复核：来源正确性为 26/26，九道硬安全门题均未调用模型；但 G11 出现无依据的价格类别扩写，G13/G15 未明确给出选品的完整商品名，故尚未达到演示门槛。原始回答与报告仍只保存在 gitignore 的本地运行目录，未进入提交；脱敏结论见 [GENERATION_EVALUATION_BADCASE_SUMMARY.md](docs/GENERATION_EVALUATION_BADCASE_SUMMARY.md)。本次提示与上下文范围修复后尚未重新调用真实模型，仓库内报告仍明确为 **not_run**，不含虚构的模型指标或人工结论；见 [GENERATION_EVALUATION_REPORT.md](docs/GENERATION_EVALUATION_REPORT.md)。下一次真实运行完成后，再使用离线人工复核命令在同一 `data/runtime/generation_evaluation/latest/` 中更新 trace/report 与演示门槛。人工复核覆盖所有自动失败题，加上至少 20% “已调用 LLM 且自动通过”的题；九道硬安全门题不计入生成抽样，由独立安全门测试保证。
+来源绑定修复后的第二轮本地 DeepSeek 运行经人工复核发现了 G11 的无依据价格类别扩写，以及 G13/G15 未明确给出选品完整商品名。第三轮修复后，17 道可答题调用模型，九道硬安全门题均未调用模型；G11/G15 自动通过，G13 经人工复核通过。G13 的旧自动失败来自评估器漏算模型实际看到的公开商品名，而非模型编造，因此已用 `scripts/recalibrate_generation_evaluation.py` 对该已完成父运行做纯离线证据口径校准：派生报告记录父 trace SHA-256、不覆盖原始 trace、不调用 API；结果为自动 26/26 通过，重算人工抽样 4/4 完成且通过。该结果达到限定商城目录、固定题集和已完成复核条件下的独立演示门槛，但不代表正式商用就绪。原始回答与报告仍只保存在 gitignore 的本地运行目录，未进入提交；脱敏结论见 [GENERATION_EVALUATION_BADCASE_SUMMARY.md](docs/GENERATION_EVALUATION_BADCASE_SUMMARY.md)。
 
 ## 已知限制
 
 - `MIN_RELEVANCE=0.60` 是当前小型保留集上的暂用值，不是长期固定阈值；资料、模型或流量分布变化后需要重跑保留评估。明确属性保护仍是保守词表，而非通用字段级事实验证。
 - BM25 与 RRF 仅作为可配置的离线对照实现，未因本次实验改为默认；尚未实现 Rerank、MCP、多模态、Dashboard 或复杂评测体系。
-- 真实 LLM 生成评估只能在本地 `.env` 已配置时显式运行；自动规则不是 LLM Judge 或绝对真相。模型必须以结构化 `used_source_ids` 引用当次证据，后端只返回验证过的来源；格式或引用无效会转人工。完成全部失败题和 20% 有模型回答的通过题的人工复核前，不能判定达到独立演示门槛。
+- 真实 LLM 生成评估只能在本地 `.env` 已配置时显式运行；自动规则不是 LLM Judge 或绝对真相。模型必须以结构化 `used_source_ids` 引用当次证据，后端只返回验证过的来源；格式或引用无效会转人工。当前演示门槛仅对已校准的本地运行成立；后续资料、提示或模型变化后，仍须重做自动评估和规定人工复核。
 - 当前硬规则会把库存、具体/实时交期、订单级/批量/经销报价，以及食品保质期、配料、过敏原转人工；“微波炉”只在命中明确写有该事实的商品资料时回答。
 - 公开展示价不是经销价、批量价或订单级最终报价。任何未被当前资料覆盖的信息一律转人工。
 

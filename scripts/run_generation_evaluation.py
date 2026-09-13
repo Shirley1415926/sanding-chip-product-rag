@@ -28,6 +28,7 @@ from sanding_rag.generation_evaluation import (  # noqa: E402
     apply_manual_review_plan,
     evaluate_case,
     failure_examples,
+    public_evidence_text,
     redact_text,
     summarize,
 )
@@ -264,7 +265,9 @@ def _run_cases(
         elapsed_ms = (time.perf_counter_ns() - started) / 1_000_000
         llm_called = llm.calls > before_calls
         retrieval_sources = _top_k_trace(matches)
-        evidence_text = "\n\n".join(str(match.text) for match in matches)
+        evidence_text = public_evidence_text(
+            (str(match.metadata["product_name"]), str(match.text)) for match in matches
+        )
         evaluation = evaluate_case(
             case=case,
             answer=answer,

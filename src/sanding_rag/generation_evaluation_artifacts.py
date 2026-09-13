@@ -76,6 +76,17 @@ def render_report(report: dict[str, Any]) -> str:
         return "\n".join(lines) + "\n"
 
     summary = report["summary"]
+    parent_run = report.get("parent_run")
+    if isinstance(parent_run, dict):
+        lines.extend(
+            [
+                "## 离线校准来源",
+                "",
+                "本报告是对已完成父运行的离线评估口径校准，不会覆盖父 trace，也没有重新调用模型。",
+                f"父运行：`{parent_run.get('trace_path')}`；父运行日期：{parent_run.get('run_at')}；父 trace SHA-256：`{parent_run.get('trace_sha256')}`。",
+                "",
+            ]
+        )
     lines.extend(
         [
             "## 运行范围",

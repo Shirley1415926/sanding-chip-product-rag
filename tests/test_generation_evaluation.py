@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from sanding_rag.generation_evaluation import (
     apply_manual_review_plan,
     evaluate_case,
+    public_evidence_text,
     redact_text,
     review_selection,
     summarize,
@@ -33,6 +34,17 @@ HANDOFF_CASE = {
     "expected_answer_points": [],
     "required_sources": [],
     "required_product_ids": [],
+}
+SELECTION_CASE = {
+    "id": "G13",
+    "must_handoff": False,
+    "expected_answer_points": [
+        {"id": "product", "accepted_values": ["古田竹荪干货"]},
+        {"id": "unit_weight", "accepted_values": ["80g/袋"]},
+        {"id": "carton", "accepted_values": ["20袋/箱"]},
+    ],
+    "required_sources": ["catalog/fungus.md"],
+    "required_product_ids": ["fungus"],
 }
 SOURCE = {
     "source": "catalog/cork.md",
@@ -96,6 +108,39 @@ class GenerationEvaluationTests(unittest.TestCase):
         )
         self.assertFalse(result["dimensions"]["groundedness"]["passed"])
         self.assertIn("四川成都", result["dimensions"]["groundedness"]["reasons"][0])
+
+    def test_public_product_name_is_grounding_evidence_but_another_name_is_not(self) -> None:
+        evidence = public_evidence_text(
+            [("古田竹荪干货", "产地：福建古田。规格：80g/袋。包装：20袋/箱。")]
+        )
+        self.assertIn("商品名称：古田竹荪干货", evidence)
+        self.assertNotIn("product_id", evidence)
+        self.assertNotIn("chunk_id", evidence)
+        self.assertNotIn("score", evidence)
+        grounded = evaluate_case(
+            case=SELECTION_CASE,
+            answer="古田竹荪干货：规格为80g/袋，包装为20袋/箱。",
+            handoff_required=False,
+            handoff_reason=None,
+            returned_sources=[{"source": "catalog/fungus.md", "source_url": "https://example.test/fungus"}],
+            returned_product_ids=["fungus"],
+            evidence_text=evidence,
+            llm_called=True,
+            known_fact_values=["古田竹荪干货", "80g/袋", "20袋/箱", "正宗火锅底料礼盒"],
+        )
+        fabricated = evaluate_case(
+            case=SELECTION_CASE,
+            answer="正宗火锅底料礼盒：规格为80g/袋，包装为20袋/箱。",
+            handoff_required=False,
+            handoff_reason=None,
+            returned_sources=[{"source": "catalog/fungus.md", "source_url": "https://example.test/fungus"}],
+            returned_product_ids=["fungus"],
+            evidence_text=evidence,
+            llm_called=True,
+            known_fact_values=["古田竹荪干货", "80g/袋", "20袋/箱", "正宗火锅底料礼盒"],
+        )
+        self.assertTrue(grounded["dimensions"]["groundedness"]["passed"])
+        self.assertFalse(fabricated["dimensions"]["groundedness"]["passed"])
 
     def test_handoff_requires_no_llm_call_or_sources(self) -> None:
         result = evaluate_case(

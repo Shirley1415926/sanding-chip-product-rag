@@ -59,6 +59,18 @@ def normalized(text: str) -> str:
     return re.sub(r"\s+", "", text).lower()
 
 
+def public_evidence_text(evidence: Iterable[tuple[str, str]]) -> str:
+    """Render the exact public name/body evidence contract used for evaluation.
+
+    Product names are public catalog metadata, while product IDs, chunk IDs and
+    retrieval scores are internal routing/debug values and therefore excluded.
+    """
+    return "\n\n".join(
+        f"商品名称：{product_name}\n公开证据：\n{text}"
+        for product_name, text in evidence
+    )
+
+
 def point_coverage(answer: str, points: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Check each declared answer point against allowed faithful surface forms."""
     answer_normalized = normalized(answer)
