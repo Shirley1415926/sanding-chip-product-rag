@@ -32,6 +32,9 @@ class Settings:
     collection_name: str
     top_k: int
     min_relevance: float
+    retrieval_mode: str
+    rrf_k: int
+    rrf_candidate_depth: int
     evaluation_thresholds: tuple[float, ...]
 
     @classmethod
@@ -40,6 +43,9 @@ class Settings:
         chroma_location = Path(os.getenv("CHROMA_PATH", "data/chroma"))
         if not chroma_location.is_absolute():
             chroma_location = project_root / chroma_location
+        retrieval_mode = os.getenv("RETRIEVAL_MODE", "dense").strip().lower()
+        if retrieval_mode not in {"dense", "bm25", "hybrid_rrf"}:
+            raise ValueError("RETRIEVAL_MODE must be one of: dense, bm25, hybrid_rrf")
         return cls(
             project_root=project_root,
             embedding_provider=os.getenv("EMBEDDING_PROVIDER", "sentence_transformers"),
@@ -52,6 +58,9 @@ class Settings:
             collection_name=os.getenv("COLLECTION_NAME", "sanding_product_knowledge"),
             top_k=int(os.getenv("TOP_K", "4")),
             min_relevance=float(os.getenv("MIN_RELEVANCE", "0.60")),
+            retrieval_mode=retrieval_mode,
+            rrf_k=int(os.getenv("RRF_K", "60")),
+            rrf_candidate_depth=int(os.getenv("RRF_CANDIDATE_DEPTH", "12")),
             evaluation_thresholds=tuple(
                 float(value.strip())
                 for value in os.getenv("EVALUATION_THRESHOLDS", "0.30,0.45,0.60,0.70").split(",")

@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import sys
 import tempfile
+from dataclasses import replace
 from argparse import ArgumentParser
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,7 @@ from sanding_rag.config import Settings  # noqa: E402
 from sanding_rag.embedding import HashingTestEmbedder, SentenceTransformerEmbedder  # noqa: E402
 from sanding_rag.ingestion import MarkdownIngestionPipeline  # noqa: E402
 from sanding_rag.llm import ContextEchoLLM  # noqa: E402
+from sanding_rag.runtime import make_retriever  # noqa: E402
 from sanding_rag.service import RAGAnswerService  # noqa: E402
 from sanding_rag.splitter import SemanticRecursiveSplitter  # noqa: E402
 
@@ -31,6 +33,12 @@ def _arguments() -> object:
     parser.add_argument(
         "--thresholds",
         help="comma-separated candidate MIN_RELEVANCE values; default comes from EVALUATION_THRESHOLDS",
+    )
+    parser.add_argument(
+        "--retrieval-mode",
+        choices=("dense", "bm25", "hybrid_rrf"),
+        default="dense",
+        help="retrieval mode to evaluate; defaults to the production Dense baseline",
     )
     parser.add_argument(
         "--output",
@@ -152,6 +160,7 @@ def _trace_case(service: RAGAnswerService, case: dict[str, Any]) -> dict[str, An
 def main() -> int:
     args = _arguments()
     settings = Settings.from_environment(PROJECT_ROOT)
+    settings = replace(settings, retrieval_mode=args.retrieval_mode)
     thresholds = _parse_thresholds(args.thresholds) if args.thresholds else settings.evaluation_thresholds
     if len(thresholds) < 3:
         raise ValueError("EVALUATION_THRESHOLDS must contain at least three values")
@@ -177,6 +186,7 @@ def main() -> int:
                 llm=ContextEchoLLM(),
                 top_k=settings.top_k,
                 min_relevance=threshold,
+                retriever=make_retriever(settings, embedder, store),
             )
             traces = [_trace_case(service, case) for case in cases]
             comparisons.append(
@@ -193,6 +203,7 @@ def main() -> int:
         "embedding_mode": "hashing_test_embedder" if args.hashing_test_embedder else "sentence_transformers",
         "embedding_model": settings.embedding_model,
         "top_k": settings.top_k,
+        "retrieval_mode": settings.retrieval_mode,
         "threshold_comparisons": comparisons,
     }
     output_path = args.output if args.output.is_absolute() else PROJECT_ROOT / args.output

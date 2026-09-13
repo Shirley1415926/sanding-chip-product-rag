@@ -8,6 +8,7 @@ from .chroma_store import ChromaStore
 from .domain import AnswerPayload, RetrievedChunk
 from .embedding import EmbeddingProvider
 from .llm import LLMProvider
+from .retrieval import DenseRetriever, Retriever
 
 
 HANDOFF_MESSAGE = "抱歉，当前知识库没有足够的可核验依据。为避免提供不准确的库存、实时交期或最终报价，请转人工客服确认。"
@@ -39,8 +40,9 @@ class RAGAnswerService:
         store: ChromaStore,
         llm: LLMProvider,
         top_k: int = 4,
-        min_relevance: float = 0.45,
+        min_relevance: float = 0.60,
         safety_gate: SafetyGate | None = None,
+        retriever: Retriever | None = None,
     ) -> None:
         self._embedder = embedder
         self._store = store
@@ -48,6 +50,12 @@ class RAGAnswerService:
         self._top_k = top_k
         self._min_relevance = min_relevance
         self._safety_gate = safety_gate or SafetyGate()
+        self._retriever = retriever or DenseRetriever(embedder, store)
+
+    @property
+    def min_relevance(self) -> float:
+        """Expose the active threshold for configuration regression tests."""
+        return self._min_relevance
 
     def ask(self, question: str) -> AnswerPayload:
         question = question.strip()
@@ -88,7 +96,7 @@ class RAGAnswerService:
         blocked_reason = self._safety_gate.blocked_reason(question)
         if blocked_reason:
             return blocked_reason, []
-        return None, self._store.query(self._embedder.embed_query(question), self._top_k)
+        return None, self._retriever.query(question, self._top_k)
 
     @staticmethod
     def _format_context(matches: list[RetrievedChunk]) -> str:

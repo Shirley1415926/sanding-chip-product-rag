@@ -9,7 +9,7 @@ from pathlib import Path
 
 from .config import Settings
 from .ingestion import MarkdownIngestionPipeline
-from .runtime import LazyProductionLLM, make_production_embedder, make_store
+from .runtime import LazyProductionLLM, make_production_embedder, make_retriever, make_store
 from .service import RAGAnswerService
 from .splitter import SemanticRecursiveSplitter
 
@@ -50,6 +50,7 @@ def main() -> None:
             llm=LazyProductionLLM(settings),
             top_k=settings.top_k,
             min_relevance=settings.min_relevance,
+            retriever=make_retriever(settings, embedder, store),
         )
         print(json.dumps(service.ask(args.question).to_dict(), ensure_ascii=False, indent=2))
     except Exception as exc:  # CLI should return an actionable short error, not a stack trace by default.

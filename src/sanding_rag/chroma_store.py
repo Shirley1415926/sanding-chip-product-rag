@@ -66,6 +66,32 @@ class ChromaStore:
             for chunk_id, document, metadata, distance in zip(ids, documents, metadatas, distances, strict=True)
         ]
 
+    def all_chunks(self) -> list[RetrievedChunk]:
+        """Return every stored chunk for deterministic lexical indexing.
+
+        Chroma remains the source of truth: the BM25 adapter rebuilds a tiny,
+        in-memory index from these documents rather than maintaining a second
+        persisted copy that could drift after re-ingestion.
+        """
+        if not self.count:
+            return []
+        result = self._collection.get(include=["documents", "metadatas"])
+        chunks = [
+            RetrievedChunk(
+                chunk_id=chunk_id,
+                text=document,
+                metadata=metadata,
+                score=0.0,
+            )
+            for chunk_id, document, metadata in zip(
+                result.get("ids", []),
+                result.get("documents", []),
+                result.get("metadatas", []),
+                strict=True,
+            )
+        ]
+        return sorted(chunks, key=lambda chunk: chunk.chunk_id)
+
     def clear(self) -> None:
         """Testing helper that clears only the configured collection."""
         ids = self._collection.get(include=[]).get("ids", [])

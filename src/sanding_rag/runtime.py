@@ -6,6 +6,7 @@ from .chroma_store import ChromaStore
 from .config import Settings
 from .embedding import EmbeddingProvider, SentenceTransformerEmbedder
 from .llm import LLMProvider, OpenAICompatibleLLM
+from .retrieval import BM25Retriever, DenseRetriever, HybridRRFRetriever, Retriever
 
 
 def make_production_embedder(settings: Settings) -> EmbeddingProvider:
@@ -42,3 +43,25 @@ class LazyProductionLLM:
 
 def make_store(settings: Settings) -> ChromaStore:
     return ChromaStore(settings.chroma_path, settings.collection_name)
+
+
+def make_retriever(
+    settings: Settings,
+    embedder: EmbeddingProvider,
+    store: ChromaStore,
+) -> Retriever:
+    """Choose an explicit retrieval mode; production default remains Dense."""
+    dense = DenseRetriever(embedder, store)
+    if settings.retrieval_mode == "dense":
+        return dense
+    bm25 = BM25Retriever.from_store(store)
+    if settings.retrieval_mode == "bm25":
+        return bm25
+    if settings.retrieval_mode == "hybrid_rrf":
+        return HybridRRFRetriever(
+            dense,
+            bm25,
+            rrf_k=settings.rrf_k,
+            candidate_depth=settings.rrf_candidate_depth,
+        )
+    raise ValueError(f"Unsupported retrieval mode: {settings.retrieval_mode}")

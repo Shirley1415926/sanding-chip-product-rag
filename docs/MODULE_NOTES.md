@@ -53,3 +53,9 @@
 解决什么：在不使用回归题调参的前提下，量化不同阈值的检索命中、错误回答和误转人工风险。
 输入 → 输出：32 道独立保留题、候选 `MIN_RELEVANCE`、真实 Top-K → 阈值指标汇总和每题 JSON trace。
 为什么：trace 记录硬安全门、来源、商品 ID、分数与最终结果，能区分“阈值过高导致拒答”和“风险规则正确阻断”；保留集与 18 道回归集分开，避免把已知题目记忆成阈值结论。
+
+## 10. 检索模式对照（Dense、BM25、Hybrid RRF）
+
+解决什么：在当前 Dense 已有良好表现时，用独立的可回答检索压力集验证词法检索或混合检索是否真的改善来源排序，而非默认假设 Hybrid 更好。
+输入 → 输出：问题 + 当前 Chroma chunk → `Retriever.query(question, top_k)` 的 Top-K `RetrievedChunk`；压力集输出 Source Hit@1、Hit@3、MRR、平均延迟与串商品错误。
+为什么：BM25 使用确定性中文 token（商品名、CJK n-gram、数字、单位、规格）保证测试可重现；Hybrid 仅以 RRF 名次融合，避免把余弦分和 BM25 原始分直接相加。三种模式都复用同一个安全门和 0.60 阈值。27 题实验没有发现 Hybrid 的质量收益，故默认保持 Dense；详见 `HYBRID_RETRIEVAL_EXPERIMENT.md`。

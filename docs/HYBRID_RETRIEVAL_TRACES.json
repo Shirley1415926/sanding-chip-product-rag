@@ -1,0 +1,2798 @@
+{
+  "dataset": "data/retrieval_stress_questions.json",
+  "dataset_case_count": 27,
+  "embedding_mode": "sentence_transformers",
+  "embedding_model": "BAAI/bge-small-zh-v1.5",
+  "top_k": 4,
+  "rrf": {
+    "rrf_k": 60,
+    "candidate_depth": 12
+  },
+  "comparisons": [
+    {
+      "mode": "dense",
+      "metrics": {
+        "source_hit_at_1": 1.0,
+        "source_hit_at_3": 1.0,
+        "mrr_at_top_k": 1.0,
+        "average_retrieval_latency_ms": 6.297,
+        "cross_product_error_count": 0
+      },
+      "traces": [
+        {
+          "case_id": "S01",
+          "category": "精确商品名",
+          "query": "三坊七巷主题福州软木画",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9952
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.8553
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.4472
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.4373
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 11.619,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S02",
+          "category": "产地与品类",
+          "query": "福建福州出品的软木工艺礼品",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.7536
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.654
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.6539
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.6355
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 11.334,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S03",
+          "category": "自然语言选品",
+          "query": "送人想选一件福州城市主题的礼盒装工艺摆件",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.6516
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.6439
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.6436
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.6199
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 8.149,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S04",
+          "category": "精确商品名",
+          "query": "乌龙茶叶礼盒",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9862
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.8272
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.6142
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.5517
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.433,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S05",
+          "category": "数字与规格",
+          "query": "100g一罐、两罐装的福建茶礼",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.788
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.7517
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.6597
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.6123
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.702,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S06",
+          "category": "产地与品类",
+          "query": "福建茶产区的乌龙茶双罐礼盒",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.8822
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.8291
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.8145
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.6284
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.217,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S07",
+          "category": "精确商品名",
+          "query": "古田竹荪干货",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9895
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.8153
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.5474
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.45
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.196,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S08",
+          "category": "多条件选品",
+          "query": "福建加干货加80g/袋，想找哪一种",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.6656
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.6
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.5898
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.5835
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.86,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S09",
+          "category": "数字与规格",
+          "query": "二十袋一箱的菌菇干货",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.6059
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.5743
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.5264
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.4634
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.635,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S10",
+          "category": "精确商品名",
+          "query": "景德镇青花高足杯",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9915
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.8409
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.6591
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.5785
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.928,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S11",
+          "category": "多条件选品",
+          "query": "景德镇、可定制、双杯礼盒的杯子",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.7932
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.729
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.6837
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.6199
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.614,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S12",
+          "category": "自然语言选品",
+          "query": "想找江西景德镇的一对装青花杯作为礼物",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.7502
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.7228
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.7165
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.7016
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.467,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S13",
+          "category": "精确商品名",
+          "query": "景德镇青花龙纹瓷盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9929
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.8603
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.6599
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.6142
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.557,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S14",
+          "category": "数字与规格",
+          "query": "十件起订的单件礼盒瓷盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.7154
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.6228
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.5994
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.5875
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.324,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S15",
+          "category": "多条件选品",
+          "query": "江西景德镇加龙纹加10件起订的餐盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.7399
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.7209
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.661
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.6229
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.143,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S16",
+          "category": "精确商品名",
+          "query": "玲珑瓷餐具套装",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9887
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.8215
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.5433
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.5318
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.565,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S17",
+          "category": "数字与规格",
+          "query": "56头的骨瓷餐桌套装",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.7218
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.6929
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.6278
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.5579
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 4.942,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S18",
+          "category": "自然语言选品",
+          "query": "家用整套餐具，想找景德镇那套五十六头的",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.6536
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.6242
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.6087
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.5807
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.784,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S19",
+          "category": "精确商品名",
+          "query": "福州脱胎漆器流纹花瓶摆件",
+          "expected": {
+            "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+            "product_id": "marketplace-fuzhou-bodiless-lacquer-vase"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9949
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9133
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.5685
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.5564
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.264,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S20",
+          "category": "产地与品类",
+          "query": "福建福州的流纹花瓶礼盒摆件",
+          "expected": {
+            "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+            "product_id": "marketplace-fuzhou-bodiless-lacquer-vase"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.8116
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.8039
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.6599
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.6406
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.307,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S21",
+          "category": "精确商品名",
+          "query": "正宗火锅底料礼盒",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.991
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.8691
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.5524
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.5276
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.625,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S22",
+          "category": "多条件选品",
+          "query": "四川成都、四袋装、每袋200g的火锅礼品",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.8166
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.7353
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.6917
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.5324
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 4.915,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S23",
+          "category": "数字与规格",
+          "query": "200g一袋的四袋装火锅调味礼盒",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.7561
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.7402
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.6283
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.5285
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.525,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S24",
+          "category": "精确商品名",
+          "query": "潮汕沙茶酱",
+          "expected": {
+            "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+            "product_id": "marketplace-chaoshan-shacha-sauce"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9875
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.8264
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.5487
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.5115
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.894,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S25",
+          "category": "数字与规格",
+          "query": "广东潮汕、300g/瓶的酱料",
+          "expected": {
+            "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+            "product_id": "marketplace-chaoshan-shacha-sauce"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.786
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.7624
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.7429
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.5141
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 4.941,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S26",
+          "category": "精确商品名",
+          "query": "寿山石瑞兽摆件",
+          "expected": {
+            "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+            "product_id": "marketplace-shoushan-stone-auspicious-beast"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9877
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.8428
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.5547
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.5196
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.134,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S27",
+          "category": "产地与品类",
+          "query": "福州晋安区寿山乡的礼盒装瑞兽石雕摆件",
+          "expected": {
+            "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+            "product_id": "marketplace-shoushan-stone-auspicious-beast"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.875
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.782
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.7095
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.5955
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.946,
+          "cross_product_error": false
+        }
+      ]
+    },
+    {
+      "mode": "bm25",
+      "metrics": {
+        "source_hit_at_1": 1.0,
+        "source_hit_at_3": 1.0,
+        "mrr_at_top_k": 1.0,
+        "average_retrieval_latency_ms": 0.112,
+        "cross_product_error_count": 0
+      },
+      "traces": [
+        {
+          "case_id": "S01",
+          "category": "精确商品名",
+          "query": "三坊七巷主题福州软木画",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9928
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9913
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9864
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.8608
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.203,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S02",
+          "category": "产地与品类",
+          "query": "福建福州出品的软木工艺礼品",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9635
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9579
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9467
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9465
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.125,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S03",
+          "category": "自然语言选品",
+          "query": "送人想选一件福州城市主题的礼盒装工艺摆件",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9491
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9444
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9427
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9377
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.173,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S04",
+          "category": "精确商品名",
+          "query": "乌龙茶叶礼盒",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9857
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9818
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9683
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.8094
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.077,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S05",
+          "category": "数字与规格",
+          "query": "100g一罐、两罐装的福建茶礼",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9618
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.957
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.8707
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.8704
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.099,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S06",
+          "category": "产地与品类",
+          "query": "福建茶产区的乌龙茶双罐礼盒",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9864
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9832
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9638
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.8769
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.131,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S07",
+          "category": "精确商品名",
+          "query": "古田竹荪干货",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9875
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9852
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9766
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.06,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S08",
+          "category": "多条件选品",
+          "query": "福建加干货加80g/袋，想找哪一种",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9699
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9617
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9257
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.8486
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.094,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S09",
+          "category": "数字与规格",
+          "query": "二十袋一箱的菌菇干货",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9431
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9268
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9257
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.8009
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.078,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S10",
+          "category": "精确商品名",
+          "query": "景德镇青花高足杯",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9887
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9867
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9796
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9728
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.093,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S11",
+          "category": "多条件选品",
+          "query": "景德镇、可定制、双杯礼盒的杯子",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9774
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9738
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9483
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9386
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.108,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S12",
+          "category": "自然语言选品",
+          "query": "想找江西景德镇的一对装青花杯作为礼物",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9746
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9705
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9687
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9642
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.177,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S13",
+          "category": "精确商品名",
+          "query": "景德镇青花龙纹瓷盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9899
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9877
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9809
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9734
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.11,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S14",
+          "category": "数字与规格",
+          "query": "十件起订的单件礼盒瓷盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9742
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9704
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9295
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9241
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.113,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S15",
+          "category": "多条件选品",
+          "query": "江西景德镇加龙纹加10件起订的餐盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9845
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9817
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9646
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.964
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.149,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S16",
+          "category": "精确商品名",
+          "query": "玲珑瓷餐具套装",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9889
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9862
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.978
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.7362
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.076,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S17",
+          "category": "数字与规格",
+          "query": "56头的骨瓷餐桌套装",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9718
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.966
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9526
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.7362
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.077,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S18",
+          "category": "自然语言选品",
+          "query": "家用整套餐具，想找景德镇那套五十六头的",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9649
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9562
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9417
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.935
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.129,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S19",
+          "category": "精确商品名",
+          "query": "福州脱胎漆器流纹花瓶摆件",
+          "expected": {
+            "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+            "product_id": "marketplace-fuzhou-bodiless-lacquer-vase"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.993
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.992
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9876
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9135
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.136,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S20",
+          "category": "产地与品类",
+          "query": "福建福州的流纹花瓶礼盒摆件",
+          "expected": {
+            "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+            "product_id": "marketplace-fuzhou-bodiless-lacquer-vase"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9816
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9784
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9756
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9518
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.133,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S21",
+          "category": "精确商品名",
+          "query": "正宗火锅底料礼盒",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9897
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9875
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.98
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.7985
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.093,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S22",
+          "category": "多条件选品",
+          "query": "四川成都、四袋装、每袋200g的火锅礼品",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9828
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9799
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9289
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.8665
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.104,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S23",
+          "category": "数字与规格",
+          "query": "200g一袋的四袋装火锅调味礼盒",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9667
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9597
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9396
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.8665
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.116,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S24",
+          "category": "精确商品名",
+          "query": "潮汕沙茶酱",
+          "expected": {
+            "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+            "product_id": "marketplace-chaoshan-shacha-sauce"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9844
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9821
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9721
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.7514
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.05,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S25",
+          "category": "数字与规格",
+          "query": "广东潮汕、300g/瓶的酱料",
+          "expected": {
+            "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+            "product_id": "marketplace-chaoshan-shacha-sauce"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9825
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9791
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9447
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.7954
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.078,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S26",
+          "category": "精确商品名",
+          "query": "寿山石瑞兽摆件",
+          "expected": {
+            "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+            "product_id": "marketplace-shoushan-stone-auspicious-beast"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9889
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9866
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9791
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.8753
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.074,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S27",
+          "category": "产地与品类",
+          "query": "福州晋安区寿山乡的礼盒装瑞兽石雕摆件",
+          "expected": {
+            "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+            "product_id": "marketplace-shoushan-stone-auspicious-beast"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.989
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9864
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9732
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9377
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 0.164,
+          "cross_product_error": false
+        }
+      ]
+    },
+    {
+      "mode": "hybrid_rrf",
+      "metrics": {
+        "source_hit_at_1": 1.0,
+        "source_hit_at_3": 1.0,
+        "mrr_at_top_k": 1.0,
+        "average_retrieval_latency_ms": 5.98,
+        "cross_product_error_count": 0
+      },
+      "traces": [
+        {
+          "case_id": "S01",
+          "category": "精确商品名",
+          "query": "三坊七巷主题福州软木画",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9952
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9913
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9864
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.7662
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.127,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S02",
+          "category": "产地与品类",
+          "query": "福建福州出品的软木工艺礼品",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9635
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9579
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9444
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9467
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.859,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S03",
+          "category": "自然语言选品",
+          "query": "送人想选一件福州城市主题的礼盒装工艺摆件",
+          "expected": {
+            "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+            "product_id": "marketplace-cork-painting-sanfangqixiang"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9427
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9491
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9356
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9377
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.025,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S04",
+          "category": "精确商品名",
+          "query": "乌龙茶叶礼盒",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9862
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9818
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9683
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.8094
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.41,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S05",
+          "category": "数字与规格",
+          "query": "100g一罐、两罐装的福建茶礼",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.957
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9618
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.8514
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.8557
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.386,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S06",
+          "category": "产地与品类",
+          "query": "福建茶产区的乌龙茶双罐礼盒",
+          "expected": {
+            "source": "catalog/marketplace-oolong-tea-gift-box.md",
+            "product_id": "marketplace-oolong-tea-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9864
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9832
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.9638
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.8769
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.216,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S07",
+          "category": "精确商品名",
+          "query": "古田竹荪干货",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9895
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9852
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9766
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.45
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.608,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S08",
+          "category": "多条件选品",
+          "query": "福建加干货加80g/袋，想找哪一种",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9617
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9699
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.796
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.8269
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.828,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S09",
+          "category": "数字与规格",
+          "query": "二十袋一箱的菌菇干货",
+          "expected": {
+            "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+            "product_id": "marketplace-gutian-bamboo-fungus"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9431
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9268
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.9257
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.8009
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.021,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S10",
+          "category": "精确商品名",
+          "query": "景德镇青花高足杯",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9915
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9867
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9728
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9796
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.864,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S11",
+          "category": "多条件选品",
+          "query": "景德镇、可定制、双杯礼盒的杯子",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9738
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9774
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9483
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9386
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.428,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S12",
+          "category": "自然语言选品",
+          "query": "想找江西景德镇的一对装青花杯作为礼物",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+            "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9746
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9705
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9633
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9687
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.972,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S13",
+          "category": "精确商品名",
+          "query": "景德镇青花龙纹瓷盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9929
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9877
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
+              "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
+              "score": 0.9734
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9809
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.862,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S14",
+          "category": "数字与规格",
+          "query": "十件起订的单件礼盒瓷盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9742
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9704
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9127
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9241
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.712,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S15",
+          "category": "多条件选品",
+          "query": "江西景德镇加龙纹加10件起订的餐盘",
+          "expected": {
+            "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+            "product_id": "marketplace-jingdezhen-blue-white-dragon-plate"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9845
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9646
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9817
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.96
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.745,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S16",
+          "category": "精确商品名",
+          "query": "玲珑瓷餐具套装",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9889
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9862
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.7362
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.978
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.201,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S17",
+          "category": "数字与规格",
+          "query": "56头的骨瓷餐桌套装",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9718
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.966
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9526
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.7362
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.595,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S18",
+          "category": "自然语言选品",
+          "query": "家用整套餐具，想找景德镇那套五十六头的",
+          "expected": {
+            "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+            "product_id": "marketplace-linglong-porcelain-dinnerware"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9649
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9562
+            },
+            {
+              "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
+              "product_id": "marketplace-linglong-porcelain-dinnerware",
+              "score": 0.9417
+            },
+            {
+              "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
+              "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
+              "score": 0.9335
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.845,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S19",
+          "category": "精确商品名",
+          "query": "福州脱胎漆器流纹花瓶摆件",
+          "expected": {
+            "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+            "product_id": "marketplace-fuzhou-bodiless-lacquer-vase"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9949
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.992
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9135
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.8885
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.713,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S20",
+          "category": "产地与品类",
+          "query": "福建福州的流纹花瓶礼盒摆件",
+          "expected": {
+            "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+            "product_id": "marketplace-fuzhou-bodiless-lacquer-vase"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9816
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9784
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9756
+            },
+            {
+              "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
+              "product_id": "marketplace-cork-painting-sanfangqixiang",
+              "score": 0.9484
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.298,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S21",
+          "category": "精确商品名",
+          "query": "正宗火锅底料礼盒",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.991
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9875
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.98
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.7985
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.75,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S22",
+          "category": "多条件选品",
+          "query": "四川成都、四袋装、每袋200g的火锅礼品",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9828
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9799
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9289
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.7856
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.475,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S23",
+          "category": "数字与规格",
+          "query": "200g一袋的四袋装火锅调味礼盒",
+          "expected": {
+            "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+            "product_id": "marketplace-hot-pot-base-gift-box"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9667
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9396
+            },
+            {
+              "source": "catalog/marketplace-hot-pot-base-gift-box.md",
+              "product_id": "marketplace-hot-pot-base-gift-box",
+              "score": 0.9597
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.8579
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 6.116,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S24",
+          "category": "精确商品名",
+          "query": "潮汕沙茶酱",
+          "expected": {
+            "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+            "product_id": "marketplace-chaoshan-shacha-sauce"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9875
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9821
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9721
+            },
+            {
+              "source": "catalog/marketplace-oolong-tea-gift-box.md",
+              "product_id": "marketplace-oolong-tea-gift-box",
+              "score": 0.71
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.315,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S25",
+          "category": "数字与规格",
+          "query": "广东潮汕、300g/瓶的酱料",
+          "expected": {
+            "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+            "product_id": "marketplace-chaoshan-shacha-sauce"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9825
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9791
+            },
+            {
+              "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
+              "product_id": "marketplace-chaoshan-shacha-sauce",
+              "score": 0.9447
+            },
+            {
+              "source": "catalog/marketplace-gutian-bamboo-fungus.md",
+              "product_id": "marketplace-gutian-bamboo-fungus",
+              "score": 0.7848
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.756,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S26",
+          "category": "精确商品名",
+          "query": "寿山石瑞兽摆件",
+          "expected": {
+            "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+            "product_id": "marketplace-shoushan-stone-auspicious-beast"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9889
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9866
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.8753
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9791
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.534,
+          "cross_product_error": false
+        },
+        {
+          "case_id": "S27",
+          "category": "产地与品类",
+          "query": "福州晋安区寿山乡的礼盒装瑞兽石雕摆件",
+          "expected": {
+            "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+            "product_id": "marketplace-shoushan-stone-auspicious-beast"
+          },
+          "top_k": [
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.989
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9732
+            },
+            {
+              "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
+              "product_id": "marketplace-shoushan-stone-auspicious-beast",
+              "score": 0.9864
+            },
+            {
+              "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
+              "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
+              "score": 0.9377
+            }
+          ],
+          "expected_rank": 1,
+          "latency_ms": 5.793,
+          "cross_product_error": false
+        }
+      ]
+    }
+  ]
+}

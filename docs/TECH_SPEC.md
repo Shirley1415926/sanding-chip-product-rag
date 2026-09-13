@@ -16,13 +16,14 @@
 1. Markdown Loader：解析 YAML 风格 front matter 与正文，校验五个必填 Metadata。
 2. `SemanticRecursiveSplitter`：先按标题、段落、列表与句子寻找语义边界；超长片段再递归降级为字符窗口，保留少量 overlap。
 3. Embedding 抽象：生产使用 Sentence Transformers 中文模型；测试使用确定性向量，避免测试依赖网络。
-4. `ChromaStore`：使用本地持久化 Chroma collection，按 `source` 幂等替换、按向量 Top-K 查询。
-5. 问答编排：硬安全门 → Top-K 检索与阈值门 → 上下文受限 LLM → 统一来源（含 `source_url`）输出。
-6. CLI、商城目录资料、18 题回归验收脚本，以及独立保留集的阈值比较与逐题追踪脚本。
+4. `ChromaStore`：使用本地持久化 Chroma collection，按 `source` 幂等替换、按向量 Top-K 查询，并可读取当前 chunk 构建内存 BM25。
+5. 可配置检索：默认 Dense（BGE + Chroma）；确定性中文 BM25 保留商品名、数字、单位和规格；Hybrid 使用 rank-only RRF 融合两路名次。
+6. 问答编排：硬安全门 → Top-K 检索与阈值门 → 上下文受限 LLM → 统一来源（含 `source_url`）输出。
+7. CLI、商城目录资料、18 题回归验收、32 题安全保留评估，以及 27 题检索压力集脚本。
 
 ### 明确不做
 
-BM25、RRF、Rerank、多模态、Dashboard、MCP、异步队列、复杂观察体系、Ragas/Golden set 回归框架、正式权限体系与交易系统集成。
+Rerank、多模态、Dashboard、MCP、异步队列、复杂观察体系、Ragas/Golden set 回归框架、正式权限体系与交易系统集成。BM25 和 RRF 仅用于可重复对照实验，均不是默认生产路径。
 
 ## 3. 数据契约
 
@@ -51,7 +52,7 @@ Markdown + front matter
 
 question
   -> SafetyGate
-  -> EmbeddingProvider -> Chroma Top-K -> relevance gate
+  -> Retriever(dense | bm25 | hybrid_rrf) -> Top-K -> relevance gate
   -> explicit-product / explicit-fact guard
   -> Context-bound LLM
   -> {answer, sources, handoff_required}
@@ -61,7 +62,7 @@ question
 
 生产 Embedding 是 `SentenceTransformerEmbedder`（默认 `BAAI/bge-small-zh-v1.5`）；LLM 是 `OpenAICompatibleLLM`，通过 `LLM_API_BASE`、`LLM_API_KEY`、`LLM_MODEL` 对接任一 Chat Completions 兼容端点。测试模式通过依赖注入提供 `HashingTestEmbedder` 和 `ContextEchoLLM`，绝不把测试后端伪装成生产语义模型。
 
-Chroma collection 使用 cosine 空间，分数为 `1 - distance`。默认 `TOP_K=4`、`MIN_RELEVANCE=0.60`，由环境变量调节；`EVALUATION_THRESHOLDS` 配置离线候选值。当前 0.60 来自独立 32 题保留集的比较，不使用 18 题回归集调节；详见 `docs/EVALUATION_REPORT.md`。生产上线前仍需以审核后的真实问答记录再次验证。
+Chroma collection 使用 cosine 空间，Dense 分数为 `1 - distance`。默认 `TOP_K=4`、`MIN_RELEVANCE=0.60`、`RETRIEVAL_MODE=dense`，由环境变量调节；`RRF_K=60` 与 `RRF_CANDIDATE_DEPTH=12` 只在 Hybrid RRF 生效；`EVALUATION_THRESHOLDS` 配置离线候选值。BM25 原始分只用于 BM25 排序，映射到 0–1 置信度接入同一相关性门；Hybrid 的排序只按 RRF 名次融合，置信度不参与融合。当前 0.60 来自独立 32 题保留集的比较，不使用 18 题回归集调节；详见 `docs/EVALUATION_REPORT.md`。三模式对照没有显示 Hybrid 质量收益，详见 `docs/HYBRID_RETRIEVAL_EXPERIMENT.md`。生产上线前仍需以审核后的真实问答记录再次验证。
 
 ## 6. 安全控制
 
