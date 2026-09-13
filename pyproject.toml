@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sanding-chip-product-rag"
+version = "0.1.0"
+description = "叁鼎芯供应链商品知识助手：第一阶段最小 RAG 闭环"
+requires-python = ">=3.11"
+dependencies = [
+  "chromadb>=1.0.0,<2.0.0",
+  "sentence-transformers>=3.0.0,<4.0.0",
+]
+
+[project.optional-dependencies]
+dev = []
+
+[project.scripts]
+sanding-rag = "sanding_rag.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

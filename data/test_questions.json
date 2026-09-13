@@ -1,0 +1,12 @@
+[
+  {"id": "Q01", "question": "SDX-ISO-485A 的逻辑侧供电范围是多少？", "expect": "answer", "source_contains": "product-sdx-iso-485a"},
+  {"id": "Q02", "question": "SDX-DC5A-24V 的输入电压和最大输出电流是什么？", "expect": "answer", "source_contains": "product-sdx-dc5a-24v"},
+  {"id": "Q03", "question": "SDX-CONN-16P 的针位间距和推荐线规？", "expect": "answer", "source_contains": "product-sdx-conn-16p"},
+  {"id": "Q04", "question": "定制电源模块需要准备哪些资料？", "expect": "answer", "source_contains": "service-and-cooperation-policy"},
+  {"id": "Q05", "question": "SDX-CONN-16P 的量产起订量是多少？", "expect": "answer", "source_contains": "product-sdx-conn-16p"},
+  {"id": "Q06", "question": "收到产品有功能异常，售后要提交什么材料？", "expect": "answer", "source_contains": "service-and-cooperation-policy"},
+  {"id": "Q07", "question": "供应商申请入驻要提供什么材料？", "expect": "answer", "source_contains": "service-and-cooperation-policy"},
+  {"id": "Q08", "question": "经销商合作申请需要哪些信息？", "expect": "answer", "source_contains": "service-and-cooperation-policy"},
+  {"id": "Q09", "question": "SDX-ISO-485A 现在有多少库存，今天能发吗？", "expect": "handoff"},
+  {"id": "Q10", "question": "SDX-DC5A-24V 给我最终报价，明天能到货吗？", "expect": "handoff"}
+]

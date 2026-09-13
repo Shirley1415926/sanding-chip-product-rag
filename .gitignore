@@ -1,0 +1,48 @@
+# Local configuration and credentials. Keep .env.example as the committed template.
+.env
+.env.*
+!.env.example
+credentials/
+secrets/
+*.pem
+*.key
+
+# Python environments, tooling caches and test artefacts.
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.egg-info/
+
+# Local Chroma/vector data, logs and downloaded model caches.
+data/chroma/
+data/runtime/
+data/models/
+data/model_cache/
+*.sqlite
+*.sqlite3
+*.db
+logs/
+*.log
+.cache/
+model_cache/
+models/
+huggingface/
+hf_cache/
+
+# Editors and operating-system temporary files.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.ipynb_checkpoints/
