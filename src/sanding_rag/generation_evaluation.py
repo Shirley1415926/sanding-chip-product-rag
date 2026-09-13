@@ -234,9 +234,23 @@ def apply_manual_review_plan(
     traces: list[dict[str, Any]],
     provided_reviews: dict[str, dict[str, Any]] | None = None,
 ) -> None:
-    """Attach a transparent pending/completed human-review state to each trace."""
+    """Attach a transparent pending/completed human-review state to each trace.
+
+    A review file may write only to the deterministic selection.  Existing
+    completed selections are preserved when a later offline review file updates
+    only a subset of cases.
+    """
     selected = review_selection(traces)
     provided_reviews = provided_reviews or {}
+    known_case_ids = {str(trace["case_id"]) for trace in traces}
+    unknown_case_ids = sorted(set(provided_reviews) - known_case_ids)
+    if unknown_case_ids:
+        raise ValueError(f"manual review references unknown case IDs: {', '.join(unknown_case_ids)}")
+    unselected_case_ids = sorted(set(provided_reviews) - selected)
+    if unselected_case_ids:
+        raise ValueError(
+            "manual review may write only selected case IDs: " + ", ".join(unselected_case_ids)
+        )
     for trace in traces:
         case_id = str(trace["case_id"])
         review = provided_reviews.get(case_id)
@@ -251,6 +265,14 @@ def apply_manual_review_plan(
                 "decision": decision,
                 "notes": redact_text(str(review.get("notes", ""))),
             }
+        elif required and (existing_review := trace.get("manual_review")):
+            # An offline write must not alter a selected case unless that case
+            # appears in the submitted review JSON.  The initial real-run plan
+            # has already assigned its pending/completed state.
+            if existing_review.get("status") == "completed":
+                decision = str(existing_review.get("decision", "")).lower()
+                if decision not in {"pass", "fail"}:
+                    raise ValueError(f"existing manual review for {case_id} must set decision to 'pass' or 'fail'")
         elif required:
             trace["manual_review"] = {
                 "required": True,
@@ -258,7 +280,9 @@ def apply_manual_review_plan(
                 "decision": None,
                 "notes": "",
             }
-        else:
+        elif "manual_review" not in trace:
+            # Initial planning labels non-selected cases once.  Later offline
+            # writes preserve their state instead of rewriting unrelated cases.
             trace["manual_review"] = {
                 "required": False,
                 "status": "not_selected",

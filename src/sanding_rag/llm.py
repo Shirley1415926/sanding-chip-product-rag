@@ -19,6 +19,10 @@ SYSTEM_PROMPT = """你是叁鼎芯供应链商品知识助手。
 若证据无法直接回答，``answer`` 必须严格等于：{handoff}，且 ``used_source_ids`` 必须是空数组。"""
 
 
+class LLMRuntimeError(RuntimeError):
+    """A provider transport/authentication/envelope failure, not a model badcase."""
+
+
 class LLMProvider(Protocol):
     def answer(self, question: str, context: str, handoff_message: str) -> str: ...
 
@@ -59,24 +63,18 @@ class OpenAICompatibleLLM:
             with urllib.request.urlopen(request, timeout=self._timeout_seconds) as response:
                 body = json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
-            # Keep the provider's short diagnostic message so an operator can
-            # distinguish billing/model/permission errors.  The caller redacts
-            # persisted traces; never include request headers or API keys here.
-            try:
-                error_body = json.loads(exc.read().decode("utf-8"))
-                detail = str(error_body.get("error", {}).get("message", "")).strip()
-            except (UnicodeDecodeError, json.JSONDecodeError, AttributeError):
-                detail = ""
-            suffix = f"; {detail[:300]}" if detail else ""
-            raise RuntimeError(f"LLM request failed: HTTP {exc.code}{suffix}") from exc
-        except urllib.error.URLError as exc:
-            raise RuntimeError(f"LLM request failed: {exc.reason}") from exc
+            # Do not echo a provider body: it can contain request-specific or
+            # sensitive diagnostics. HTTP status is enough for the evaluation
+            # runner to classify authentication, model, quota and server faults.
+            raise LLMRuntimeError(f"LLM request failed: HTTP {exc.code}") from exc
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            raise LLMRuntimeError(f"LLM request failed: {type(exc).__name__}") from exc
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise LLMRuntimeError("LLM response was not a valid JSON envelope") from exc
         try:
             answer = body["choices"][0]["message"]["content"].strip()
         except (KeyError, IndexError, TypeError, AttributeError) as exc:
-            provider_error = str(body.get("error", {}).get("message", "")).strip() if isinstance(body, dict) else ""
-            suffix = f"; {provider_error[:300]}" if provider_error else ""
-            raise RuntimeError(f"LLM response did not contain choices[0].message.content{suffix}") from exc
+            raise LLMRuntimeError("LLM response did not contain choices[0].message.content") from exc
         return answer
 
 

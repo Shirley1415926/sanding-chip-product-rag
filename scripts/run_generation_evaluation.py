@@ -9,6 +9,7 @@ before writing local trace artifacts.
 from __future__ import annotations
 
 import json
+import re
 import sys
 import tempfile
 import time
@@ -24,13 +25,13 @@ from sanding_rag.chroma_store import ChromaStore  # noqa: E402
 from sanding_rag.config import Settings  # noqa: E402
 from sanding_rag.embedding import EmbeddingProvider  # noqa: E402
 from sanding_rag.generation_evaluation import (  # noqa: E402
-    DIMENSIONS,
     apply_manual_review_plan,
     evaluate_case,
     failure_examples,
     redact_text,
     summarize,
 )
+from sanding_rag.generation_evaluation_artifacts import demo_gate, render_report  # noqa: E402
 from sanding_rag.ingestion import MarkdownIngestionPipeline  # noqa: E402
 from sanding_rag.llm import LLMProvider, OpenAICompatibleLLM  # noqa: E402
 from sanding_rag.runtime import make_production_embedder, make_retriever  # noqa: E402
@@ -48,6 +49,44 @@ class _CountingLLM:
     def answer(self, question: str, context: str, handoff_message: str) -> str:
         self.calls += 1
         return self._delegate.answer(question, context, handoff_message)
+
+
+class EvaluationRunAborted(RuntimeError):
+    """Stop the whole run for a provider/runtime failure, without a quality result."""
+
+    def __init__(self, *, case_id: str, case_index: int, llm_called: bool, error: Exception) -> None:
+        super().__init__(type(error).__name__)
+        self.case_id = case_id
+        self.case_index = case_index
+        self.llm_called = llm_called
+        self.error_type = type(error).__name__
+        self.diagnostic = _safe_runtime_diagnostic(error)
+
+
+def _safe_runtime_diagnostic(error: Exception) -> str:
+    """Keep diagnostics actionable without persisting provider bodies or secrets."""
+    text = redact_text(str(error))
+    status_match = re.search(r"HTTP\s+(\d{3})", text)
+    if status_match:
+        status = int(status_match.group(1))
+        if status in {401, 403}:
+            return f"LLM authentication or permission was rejected (HTTP {status})"
+        if status == 404:
+            return "LLM endpoint or model was not found (HTTP 404)"
+        if status == 429:
+            return "LLM provider rate limit was reached (HTTP 429)"
+        if 500 <= status <= 599:
+            return f"LLM provider server error (HTTP {status})"
+        return f"LLM request failed (HTTP {status})"
+    if isinstance(error, TimeoutError) or "timeout" in text.lower() or "timed out" in text.lower():
+        return "LLM request timed out"
+    if "valid JSON envelope" in text:
+        return "LLM provider response envelope was invalid"
+    if "choices[0].message.content" in text:
+        return "LLM provider response did not contain a usable message"
+    if "URLError" in text or "network" in text.lower() or "OSError" in text:
+        return "LLM network request failed"
+    return f"LLM/runtime failure ({type(error).__name__})"
 
 
 def _arguments() -> object:
@@ -204,7 +243,6 @@ def _run_cases(
         hard_safety_reason, matches = service.trace_retrieval(query)
         before_calls = llm.calls
         started = time.perf_counter_ns()
-        runtime_error: str | None = None
         try:
             payload = service.ask(query)
             answer = payload.answer
@@ -213,14 +251,16 @@ def _run_cases(
             returned_sources = payload.sources
             returned_product_ids = payload.internal_returned_product_ids
             verified_used_source_ids = payload.internal_used_source_ids
-        except Exception as exc:  # Preserve a redacted diagnostic without headers, keys or raw responses.
-            runtime_error = redact_text(str(exc))[:400] or type(exc).__name__
-            answer = ""
-            handoff_required = False
-            handoff_reason = "evaluation_runtime_error"
-            returned_sources = []
-            returned_product_ids = []
-            verified_used_source_ids = []
+        except Exception as exc:
+            # Invalid answer JSON/source IDs are converted by RAGAnswerService
+            # into ordinary handoff badcases. An exception means the provider or
+            # runtime failed, so no later per-case quality conclusion is valid.
+            raise EvaluationRunAborted(
+                case_id=str(case["id"]),
+                case_index=index,
+                llm_called=llm.calls > before_calls,
+                error=exc,
+            ) from exc
         elapsed_ms = (time.perf_counter_ns() - started) / 1_000_000
         llm_called = llm.calls > before_calls
         retrieval_sources = _top_k_trace(matches)
@@ -259,115 +299,16 @@ def _run_cases(
                 "verified_used_source_ids": verified_used_source_ids,
                 "model": model_name,
                 "elapsed_ms": round(elapsed_ms, 3),
-                "runtime_error": runtime_error,
                 "evaluation": evaluation,
             }
         )
         print(
             f"[{index}/{len(cases)}] {case['id']}：完成；LLM={'是' if llm_called else '否'}；"
-            f"结果={'转人工' if handoff_required else '回答'}"
-            + (f"；错误={runtime_error}" if runtime_error else ""),
+            f"结果={'转人工' if handoff_required else '回答'}",
             file=sys.stderr,
             flush=True,
         )
     return traces
-
-
-def _render_report(report: dict[str, Any]) -> str:
-    lines = ["# 真实 LLM 回答质量评估", "", f"运行日期：{report['run_at']}", ""]
-    if report["status"] != "completed":
-        lines.extend(
-            [
-                "## 当前状态",
-                "",
-                "本次未调用真实 LLM，因此没有生成质量指标或人工复核结论。",
-                f"原因：{report['reason']}",
-                f"题目数量：{report['dataset_case_count']}；模型版本：未配置（未读取 `.env`）。",
-                "",
-                "评估脚本已就绪。仅在本地 `.env` 同时提供 `LLM_API_BASE`、`LLM_API_KEY`、`LLM_MODEL` 后，显式执行下列命令才会调用模型：",
-                "",
-                "```bash",
-                "./.venv/bin/python scripts/run_generation_evaluation.py",
-                "```",
-                "",
-                "这不会使用环境变量回退值，也不会在普通单元测试或 CI 中调用 API。真实运行的原始回答和 trace 默认写入 gitignore 的 `data/runtime/generation_evaluation/latest/`，不会自动进入提交。",
-                "",
-                "## 自动结果",
-                "",
-                "未运行，因此不存在 Groundedness、相关性、完整性、来源正确性或安全合规的自动指标。",
-                "",
-                "## 人工复核结果",
-                "",
-                "未运行，因此没有可供人工复核的真实模型回答；不能把准备清单当作人工复核已完成。真实运行时，所有自动失败题和至少 20%“已调用 LLM 且自动通过”题须人工复核；硬安全门题不计入生成回答抽样。",
-                "",
-                "## 已知边界",
-                "",
-                "未测试英文询盘、真实用户表达、提示注入、长文档或大规模语料。当前不能据此判断是否达到独立演示门槛，更不能宣称可正式商用。",
-            ]
-        )
-        return "\n".join(lines) + "\n"
-
-    summary = report["summary"]
-    lines.extend(
-        [
-            "## 运行范围",
-            "",
-            f"模型：`{report['model']}`；题目数：{report['dataset_case_count']}；检索模式：`{report['retrieval_mode']}`；MIN_RELEVANCE：`{report['min_relevance']}`。",
-            "",
-            "自动判定使用确定性规则，不调用 LLM Judge：只读取问题、Top-K 检索证据、最终回答和预期要点。它不是绝对真相，特别是无法完整识别自然语言的隐含事实或高质量同义改写。",
-            "",
-            "## 自动结果（逐维）",
-            "",
-            "| 维度 | 通过 | 失败 | 不适用 |",
-            "| --- | ---: | ---: | ---: |",
-        ]
-    )
-    labels = {
-        "groundedness": "Groundedness / 忠实度",
-        "answer_relevance": "Answer relevance / 相关性",
-        "completeness": "Completeness / 完整性",
-        "citation_correctness": "Citation correctness / 来源正确性",
-        "safety_compliance": "Safety compliance / 安全合规",
-    }
-    for dimension in DIMENSIONS:
-        metric = summary["automatic_dimensions"][dimension]
-        lines.append(f"| {labels[dimension]} | {metric['passed']} | {metric['failed']} | {metric['not_applicable']} |")
-    overall = summary["automatic_overall"]
-    lines.extend(
-        [
-            "",
-            f"自动整体结果（仅用于定位，不替代逐维结果）：通过 {overall['passed']}，失败 {overall['failed']}。",
-            "",
-            "## 人工复核结果",
-            "",
-            f"规则要求复核全部自动失败题，以及“已调用 LLM 且自动通过”题中的确定性 20% 抽样；硬安全门题不进入生成回答抽样。需要复核 {summary['manual_review']['required_case_count']} 题；已完成 {summary['manual_review']['completed_case_count']} 题；待人工复核 {summary['manual_review']['pending_case_count']} 题；人工判定通过 {summary['manual_review']['reviewer_pass_count']}，失败 {summary['manual_review']['reviewer_fail_count']}。",
-            "",
-        ]
-    )
-    failures = report["failure_examples"]
-    lines.extend(["## 自动失败样例", ""])
-    if not failures:
-        lines.append("本次自动规则没有发现失败；仍需完成规定的人工抽样复核。")
-    else:
-        for example in failures[:5]:
-            reason_text = "；".join(
-                f"{dimension}: {', '.join(reasons)}" for dimension, reasons in example["reasons"].items()
-            )
-            lines.append(f"- `{example['case_id']}`：{example['query']}。{reason_text}")
-    gate = report["demo_gate"]
-    lines.extend(
-        [
-            "",
-            "## 独立演示门槛",
-            "",
-            gate,
-            "",
-            "## 当前不能证明的边界",
-            "",
-            "本评估未测试英文询盘、真实用户表达、提示注入、长文档、大规模语料、并发、真实库存/履约/报价系统，以及长期资料更新后的表现。即使完成门槛，也仅代表限定目录与测试题下可做独立演示，不代表正式商用就绪。",
-        ]
-    )
-    return "\n".join(lines) + "\n"
 
 
 def _write_outputs(args: object, report: dict[str, Any]) -> None:
@@ -390,7 +331,37 @@ def _write_outputs(args: object, report: dict[str, Any]) -> None:
     traces_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     traces_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    report_path.write_text(_render_report(report), encoding="utf-8")
+    report_path.write_text(render_report(report), encoding="utf-8")
+
+
+def _aborted_report(
+    *,
+    run_at: str,
+    cases: list[dict[str, Any]],
+    model_name: str,
+    settings: Settings,
+    aborted: EvaluationRunAborted,
+) -> dict[str, Any]:
+    """Create a diagnostics-only artifact; never attach partial quality traces."""
+    return {
+        "status": "aborted",
+        "reason": "真实 LLM 运行时错误；未生成质量结论",
+        "run_at": run_at,
+        "aborted_at": datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds"),
+        "dataset": "data/generation_evaluation_questions.json",
+        "dataset_case_count": len(cases),
+        "model": model_name,
+        "retrieval_mode": settings.retrieval_mode,
+        "min_relevance": settings.min_relevance,
+        "diagnostic": {
+            "case_id": aborted.case_id,
+            "case_index": aborted.case_index,
+            "llm_called": aborted.llm_called,
+            "error_type": aborted.error_type,
+            "message": aborted.diagnostic,
+        },
+        "traces": [],
+    }
 
 
 def main() -> int:
@@ -422,27 +393,44 @@ def main() -> int:
     settings = Settings.from_environment(PROJECT_ROOT)
     if settings.retrieval_mode != "dense" or settings.min_relevance != 0.60:
         raise ValueError("真实生成评估固定验证 Dense 基线和 MIN_RELEVANCE=0.60；请检查本地 .env")
-    with tempfile.TemporaryDirectory(prefix="sanding-rag-generation-evaluation-") as temporary_dir:
-        store = ChromaStore(Path(temporary_dir) / "chroma", "generation_evaluation")
-        embedder = make_production_embedder(settings)
-        MarkdownIngestionPipeline(SemanticRecursiveSplitter(), embedder, store).ingest_path(
-            PROJECT_ROOT / "data" / "sample"
-        )
-        traces = _run_cases(
+    try:
+        with tempfile.TemporaryDirectory(prefix="sanding-rag-generation-evaluation-") as temporary_dir:
+            store = ChromaStore(Path(temporary_dir) / "chroma", "generation_evaluation")
+            embedder = make_production_embedder(settings)
+            MarkdownIngestionPipeline(SemanticRecursiveSplitter(), embedder, store).ingest_path(
+                PROJECT_ROOT / "data" / "sample"
+            )
+            traces = _run_cases(
+                cases=cases,
+                settings=settings,
+                embedder=embedder,
+                store=store,
+                llm=_CountingLLM(llm_delegate),
+                model_name=model_name,
+            )
+    except EvaluationRunAborted as exc:
+        report = _aborted_report(
+            run_at=run_at,
             cases=cases,
-            settings=settings,
-            embedder=embedder,
-            store=store,
-            llm=_CountingLLM(llm_delegate),
             model_name=model_name,
+            settings=settings,
+            aborted=exc,
         )
+        _write_outputs(args, report)
+        print(
+            json.dumps(
+                {
+                    "status": "aborted",
+                    "case_id": exc.case_id,
+                    "diagnostic": exc.diagnostic,
+                },
+                ensure_ascii=False,
+            ),
+            file=sys.stderr,
+        )
+        return 2
     apply_manual_review_plan(traces, _load_manual_reviews(args.manual_review_file))
     summary = summarize(traces)
-    manual = summary["manual_review"]
-    if summary["automatic_overall"]["failed"] == 0 and manual["pending_case_count"] == 0 and manual["reviewer_fail_count"] == 0:
-        demo_gate = "已达到限定商城目录、固定题集和已完成复核条件下的独立演示门槛；不代表正式商用就绪。"
-    else:
-        demo_gate = "尚未达到独立演示门槛：需要先消除自动失败，并完成全部规定的人工复核。"
     report = {
         "status": "completed",
         "run_at": run_at,
@@ -454,7 +442,7 @@ def main() -> int:
         "evaluation_method": "deterministic rules only; no LLM judge",
         "summary": summary,
         "failure_examples": failure_examples(traces),
-        "demo_gate": demo_gate,
+        "demo_gate": demo_gate(summary),
         "traces": traces,
     }
     _write_outputs(args, report)

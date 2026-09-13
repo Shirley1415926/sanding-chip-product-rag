@@ -13,7 +13,7 @@ from sanding_rag.llm import OpenAICompatibleLLM
 
 
 class OpenAICompatibleLLMErrorTests(unittest.TestCase):
-    def test_http_error_preserves_a_short_provider_diagnostic(self) -> None:
+    def test_http_error_exposes_only_status_not_provider_body(self) -> None:
         error = HTTPError(
             url="https://api.example.test/chat/completions",
             code=400,
@@ -27,7 +27,7 @@ class OpenAICompatibleLLMErrorTests(unittest.TestCase):
             model="test-model",
         )
         with patch("urllib.request.urlopen", side_effect=error):
-            with self.assertRaisesRegex(RuntimeError, r"HTTP 400; model is unavailable"):
+            with self.assertRaisesRegex(RuntimeError, r"HTTP 400"):
                 llm.answer("question", "context", "handoff")
 
 

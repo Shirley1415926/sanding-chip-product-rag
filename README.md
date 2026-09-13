@@ -64,8 +64,15 @@ python scripts/run_generation_evaluation.py --prepare-only
 
 # 显式真实评估：仅从本地 .env 读取 LLM_API_BASE、LLM_API_KEY、LLM_MODEL
 # 不属于普通单元测试或 CI；原始回答与 trace 默认写入 gitignore 的 data/runtime/，
-# 运行后还须完成脚本标记的人工复核。
+# 首个 API、网络、认证、超时或提供方响应错误会 fail-fast，以非 0 状态写入
+# status=aborted 的本地诊断，不会伪装成 completed 评估。
 python scripts/run_generation_evaluation.py
+
+# 完全离线地写入人工复核：只读取上一条命令的本地 trace 与 review JSON，
+# 不读取 .env、不初始化 Embedding、不调用 LLM 或网络。
+# review JSON 只能填写脚本已选中的 case ID，格式：{"G01":{"decision":"pass","notes":"..."}}
+python scripts/apply_generation_manual_review.py \
+  --review-file data/runtime/generation_evaluation/manual_review.json
 
 # 基础单元测试（标准库 unittest）
 PYTHONPATH=src python -m unittest discover -s tests -v
@@ -73,7 +80,7 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 ## 测试集与当前结果
 
-`data/test_questions.json` 含 18 道商城目录回归验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **33/33 通过**。
+`data/test_questions.json` 含 18 道商城目录回归验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **37/37 通过**。
 
 阈值不使用这 18 题调节，而使用独立的 32 题保留集。实际语义评估后，暂用 `MIN_RELEVANCE=0.60`：Source Hit@1/Hit@3 为 17/17，错误回答率为 0/32，正确转人工率为 15/15，串商品错误为 0。阈值对比和失败用例见 [EVALUATION_REPORT.md](docs/EVALUATION_REPORT.md)，完整逐题记录见 [EVALUATION_TRACES.json](docs/EVALUATION_TRACES.json)。
 
@@ -81,9 +88,9 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 另有独立的 27 题检索压力集，使用真实 BGE 比较 Dense、确定性中文 BM25 和 rank-only RRF：三者均为 Hit@1/Hit@3/MRR 100%、串商品 0，未出现 Hybrid 的明确质量收益，因此 `RETRIEVAL_MODE` 默认继续为 `dense`。完整方法、延迟和局限见 [HYBRID_RETRIEVAL_EXPERIMENT.md](docs/HYBRID_RETRIEVAL_EXPERIMENT.md)。
 
-`data/generation_evaluation_questions.json` 是独立的 26 题最终回答质量集，不修改也不参与 18 题回归、32 题安全或 27 题检索压力集。它同时检查公开商品回答与必须转人工的问题；显式脚本记录最终答案、完整 Top-K `retrieval_sources`、模型验证后的 `returned_sources`、模型名、耗时和逐维规则结果。`product_id` 仅保留在后端匹配与调试 trace，绝不进入模型上下文、最终回答或用户可见来源。
+`data/generation_evaluation_questions.json` 是独立的 26 题最终回答质量集，不修改也不参与 18 题回归、32 题安全或 27 题检索压力集。它同时检查公开商品回答与必须转人工的问题；显式脚本记录最终答案、完整 Top-K `retrieval_sources`、模型验证后的 `returned_sources`、模型名、耗时和逐维规则结果。`product_id` 仅保留在后端匹配与调试 trace，绝不进入模型上下文、最终回答或用户可见来源。模型的无效 JSON 或无效 `used_source_ids` 是可评估的单题 badcase；API、网络、认证、超时或提供方响应故障则会中止整轮运行，绝不会写成 `completed` 或生成质量结论。
 
-一次本地 DeepSeek 预修复运行已真实执行，但原始回答与报告只保存在 gitignore 的本地证据目录，未进入提交。该运行发现 G11 的多商品比较误转人工，以及 G13/G14/G15/G17 的无关来源绑定问题；脱敏摘要见 [GENERATION_EVALUATION_BADCASE_SUMMARY.md](docs/GENERATION_EVALUATION_BADCASE_SUMMARY.md)。本次修复后尚未重新调用真实模型，仓库内报告仍明确为 **not_run**，不含虚构的模型指标或人工结论；见 [GENERATION_EVALUATION_REPORT.md](docs/GENERATION_EVALUATION_REPORT.md)。人工复核覆盖所有自动失败题，加上至少 20% “已调用 LLM 且自动通过”的题；九道硬安全门题不计入生成抽样，由独立安全门测试保证。
+一次本地 DeepSeek 预修复运行已真实执行，但原始回答与报告只保存在 gitignore 的本地证据目录，未进入提交。该运行发现 G11 的多商品比较误转人工，以及 G13/G14/G15/G17 的无关来源绑定问题；脱敏摘要见 [GENERATION_EVALUATION_BADCASE_SUMMARY.md](docs/GENERATION_EVALUATION_BADCASE_SUMMARY.md)。本次修复后尚未重新调用真实模型，仓库内报告仍明确为 **not_run**，不含虚构的模型指标或人工结论；见 [GENERATION_EVALUATION_REPORT.md](docs/GENERATION_EVALUATION_REPORT.md)。真实运行完成后，再使用离线人工复核命令在同一 `data/runtime/generation_evaluation/latest/` 中更新 trace/report 与演示门槛。人工复核覆盖所有自动失败题，加上至少 20% “已调用 LLM 且自动通过”的题；九道硬安全门题不计入生成抽样，由独立安全门测试保证。
 
 ## 已知限制
 
