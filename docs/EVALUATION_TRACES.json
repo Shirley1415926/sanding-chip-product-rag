@@ -4,6 +4,7 @@
   "embedding_mode": "sentence_transformers",
   "embedding_model": "BAAI/bge-small-zh-v1.5",
   "top_k": 4,
+  "retrieval_mode": "dense",
   "threshold_comparisons": [
     {
       "min_relevance": 0.3,
@@ -72,26 +73,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 三坊七巷主题福州软木画## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。\n\n# 三坊七巷主题福州软木画\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 三坊七巷主题福州软木画## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。\n\n# 三坊七巷主题福州软木画\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_bad6bb75fa9467f88076",
-                "score": 0.7384
-              },
-              {
-                "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
-                "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.6029
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -105,8 +94,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-cork-painting-sanfangqixiang",
-              "marketplace-fuzhou-bodiless-lacquer-vase"
+              "marketplace-cork-painting-sanfangqixiang"
             ],
             "answer_is_correct": true
           },
@@ -155,29 +143,20 @@
               {
                 "source": "catalog/marketplace-oolong-tea-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-oolong-tea-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_0999e205d28bcf3cbcb5",
-                "score": 0.7731
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.628
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6193
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -242,29 +221,20 @@
               {
                 "source": "catalog/marketplace-gutian-bamboo-fungus.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%8f%a4%e7%94%b0%e7%ab%b9%e8%8d%aa%e5%b9%b2%e8%b4%a7/",
-                "product_id": "marketplace-gutian-bamboo-fungus",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_7d9d280b63656f507d7a",
-                "score": 0.6539
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.5712
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.5707
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -329,20 +299,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.8017
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.7019
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -406,20 +370,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_72e8fcb63a9bdfe437e5",
-                "score": 0.7497
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.6483
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -483,20 +441,14 @@
               {
                 "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%8e%b2%e7%8f%91%e7%93%b7%e9%a4%90%e5%85%b7%e5%a5%97%e8%a3%85/",
-                "product_id": "marketplace-linglong-porcelain-dinnerware",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_2db8320fb090f4361bd4",
-                "score": 0.8038
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_72e8fcb63a9bdfe437e5",
-                "score": 0.604
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -554,26 +506,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n\n# 福州脱胎漆器流纹花瓶摆件\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n\n# 福州脱胎漆器流纹花瓶摆件\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8507f673045fbde510fa",
-                "score": 0.8079
-              },
-              {
-                "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
-                "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6515
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -587,8 +527,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-fuzhou-bodiless-lacquer-vase",
-              "marketplace-cork-painting-sanfangqixiang"
+              "marketplace-fuzhou-bodiless-lacquer-vase"
             ],
             "answer_is_correct": true
           },
@@ -631,26 +570,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。\n\n# 正宗火锅底料礼盒\n\n## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 包装：单件礼盒。\n- 起订量：10 件起订。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。\n\n# 正宗火锅底料礼盒\n\n## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-hot-pot-base-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_d987708f626b69246346",
-                "score": 0.8353
-              },
-              {
-                "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
-                "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.5473
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -664,8 +591,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-hot-pot-base-gift-box",
-              "marketplace-jingdezhen-blue-white-dragon-plate"
+              "marketplace-hot-pot-base-gift-box"
             ],
             "answer_is_correct": true
           },
@@ -708,26 +634,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 潮汕沙茶酱## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。\n\n# 潮汕沙茶酱\n\n## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n 已公开目录信息\n\n- 茶产区：福建茶产区。\n- 规格：100g/罐。\n- 包装：双罐礼盒。\n- 公开展示价：¥128。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 潮汕沙茶酱## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。\n\n# 潮汕沙茶酱\n\n## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%bd%ae%e6%b1%95%e6%b2%99%e8%8c%b6%e9%85%b1/",
-                "product_id": "marketplace-chaoshan-shacha-sauce",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8bc922f67aa1f18ec324",
-                "score": 0.8026
-              },
-              {
-                "source": "catalog/marketplace-oolong-tea-gift-box.md",
-                "source_url": "https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-oolong-tea-gift-box",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_0999e205d28bcf3cbcb5",
-                "score": 0.5547
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -741,8 +655,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-chaoshan-shacha-sauce",
-              "marketplace-oolong-tea-gift-box"
+              "marketplace-chaoshan-shacha-sauce"
             ],
             "answer_is_correct": true
           },
@@ -785,26 +698,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 寿山石瑞兽摆件## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。\n\n# 寿山石瑞兽摆件\n\n## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。",
+            "answer": "根据已检索资料：# 寿山石瑞兽摆件## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。\n\n# 寿山石瑞兽摆件\n\n## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-shoushan-stone-auspicious-beast",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_48da872a88213cb6ace4",
-                "score": 0.7927
-              },
-              {
-                "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
-                "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8507f673045fbde510fa",
-                "score": 0.5532
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -818,8 +719,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-shoushan-stone-auspicious-beast",
-              "marketplace-fuzhou-bodiless-lacquer-vase"
+              "marketplace-shoushan-stone-auspicious-beast"
             ],
             "answer_is_correct": true
           },
@@ -868,29 +768,20 @@
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.71
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.6988
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-shoushan-stone-auspicious-beast",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_e38dfaeff022a9193cf8",
-                "score": 0.618
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -958,38 +849,26 @@
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6264
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.6009
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.5813
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-hot-pot-base-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_b8b0209bb507540b0044",
-                "score": 0.5773
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -1056,20 +935,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.7265
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.7076
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -1127,26 +1000,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 玲珑瓷餐具套装## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 玲珑瓷餐具套装\n\n# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。",
+            "answer": "根据已检索资料：# 玲珑瓷餐具套装## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 玲珑瓷餐具套装",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%8e%b2%e7%8f%91%e7%93%b7%e9%a4%90%e5%85%b7%e5%a5%97%e8%a3%85/",
-                "product_id": "marketplace-linglong-porcelain-dinnerware",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_fcc3db75e7a8e546b596",
-                "score": 0.6555
-              },
-              {
-                "source": "catalog/marketplace-hot-pot-base-gift-box.md",
-                "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_d987708f626b69246346",
-                "score": 0.4422
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -1160,8 +1021,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-linglong-porcelain-dinnerware",
-              "marketplace-hot-pot-base-gift-box"
+              "marketplace-linglong-porcelain-dinnerware"
             ],
             "answer_is_correct": true
           },
@@ -1210,11 +1070,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_f58dec1a2a852b3931e3",
-                "score": 0.784
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -1277,11 +1134,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_f58dec1a2a852b3931e3",
-                "score": 0.6785
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -1936,11 +1790,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_fbab6b2ce552b83acc67",
-                "score": 0.7551
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2058,26 +1909,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 三坊七巷主题福州软木画## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。\n\n# 三坊七巷主题福州软木画\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 三坊七巷主题福州软木画## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。\n\n# 三坊七巷主题福州软木画\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_bad6bb75fa9467f88076",
-                "score": 0.7384
-              },
-              {
-                "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
-                "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.6029
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2091,8 +1930,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-cork-painting-sanfangqixiang",
-              "marketplace-fuzhou-bodiless-lacquer-vase"
+              "marketplace-cork-painting-sanfangqixiang"
             ],
             "answer_is_correct": true
           },
@@ -2141,29 +1979,20 @@
               {
                 "source": "catalog/marketplace-oolong-tea-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-oolong-tea-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_0999e205d28bcf3cbcb5",
-                "score": 0.7731
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.628
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6193
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2228,29 +2057,20 @@
               {
                 "source": "catalog/marketplace-gutian-bamboo-fungus.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%8f%a4%e7%94%b0%e7%ab%b9%e8%8d%aa%e5%b9%b2%e8%b4%a7/",
-                "product_id": "marketplace-gutian-bamboo-fungus",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_7d9d280b63656f507d7a",
-                "score": 0.6539
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.5712
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.5707
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2315,20 +2135,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.8017
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.7019
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2392,20 +2206,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_72e8fcb63a9bdfe437e5",
-                "score": 0.7497
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.6483
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2469,20 +2277,14 @@
               {
                 "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%8e%b2%e7%8f%91%e7%93%b7%e9%a4%90%e5%85%b7%e5%a5%97%e8%a3%85/",
-                "product_id": "marketplace-linglong-porcelain-dinnerware",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_2db8320fb090f4361bd4",
-                "score": 0.8038
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_72e8fcb63a9bdfe437e5",
-                "score": 0.604
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2540,26 +2342,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n\n# 福州脱胎漆器流纹花瓶摆件\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n\n# 福州脱胎漆器流纹花瓶摆件\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8507f673045fbde510fa",
-                "score": 0.8079
-              },
-              {
-                "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
-                "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6515
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2573,8 +2363,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-fuzhou-bodiless-lacquer-vase",
-              "marketplace-cork-painting-sanfangqixiang"
+              "marketplace-fuzhou-bodiless-lacquer-vase"
             ],
             "answer_is_correct": true
           },
@@ -2617,26 +2406,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。\n\n# 正宗火锅底料礼盒\n\n## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 包装：单件礼盒。\n- 起订量：10 件起订。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。\n\n# 正宗火锅底料礼盒\n\n## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-hot-pot-base-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_d987708f626b69246346",
-                "score": 0.8353
-              },
-              {
-                "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
-                "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.5473
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2650,8 +2427,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-hot-pot-base-gift-box",
-              "marketplace-jingdezhen-blue-white-dragon-plate"
+              "marketplace-hot-pot-base-gift-box"
             ],
             "answer_is_correct": true
           },
@@ -2694,26 +2470,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 潮汕沙茶酱## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。\n\n# 潮汕沙茶酱\n\n## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n 已公开目录信息\n\n- 茶产区：福建茶产区。\n- 规格：100g/罐。\n- 包装：双罐礼盒。\n- 公开展示价：¥128。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 潮汕沙茶酱## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。\n\n# 潮汕沙茶酱\n\n## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%bd%ae%e6%b1%95%e6%b2%99%e8%8c%b6%e9%85%b1/",
-                "product_id": "marketplace-chaoshan-shacha-sauce",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8bc922f67aa1f18ec324",
-                "score": 0.8026
-              },
-              {
-                "source": "catalog/marketplace-oolong-tea-gift-box.md",
-                "source_url": "https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-oolong-tea-gift-box",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_0999e205d28bcf3cbcb5",
-                "score": 0.5547
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2727,8 +2491,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-chaoshan-shacha-sauce",
-              "marketplace-oolong-tea-gift-box"
+              "marketplace-chaoshan-shacha-sauce"
             ],
             "answer_is_correct": true
           },
@@ -2771,26 +2534,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 寿山石瑞兽摆件## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。\n\n# 寿山石瑞兽摆件\n\n## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。",
+            "answer": "根据已检索资料：# 寿山石瑞兽摆件## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。\n\n# 寿山石瑞兽摆件\n\n## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-shoushan-stone-auspicious-beast",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_48da872a88213cb6ace4",
-                "score": 0.7927
-              },
-              {
-                "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
-                "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8507f673045fbde510fa",
-                "score": 0.5532
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2804,8 +2555,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-shoushan-stone-auspicious-beast",
-              "marketplace-fuzhou-bodiless-lacquer-vase"
+              "marketplace-shoushan-stone-auspicious-beast"
             ],
             "answer_is_correct": true
           },
@@ -2854,29 +2604,20 @@
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.71
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.6988
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-shoushan-stone-auspicious-beast",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_e38dfaeff022a9193cf8",
-                "score": 0.618
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -2944,38 +2685,26 @@
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6264
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.6009
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.5813
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-hot-pot-base-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_b8b0209bb507540b0044",
-                "score": 0.5773
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -3042,20 +2771,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.7265
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.7076
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -3113,26 +2836,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 玲珑瓷餐具套装## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 玲珑瓷餐具套装\n\n# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。",
+            "answer": "根据已检索资料：# 玲珑瓷餐具套装## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 玲珑瓷餐具套装",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%8e%b2%e7%8f%91%e7%93%b7%e9%a4%90%e5%85%b7%e5%a5%97%e8%a3%85/",
-                "product_id": "marketplace-linglong-porcelain-dinnerware",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_fcc3db75e7a8e546b596",
-                "score": 0.6555
-              },
-              {
-                "source": "catalog/marketplace-hot-pot-base-gift-box.md",
-                "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_d987708f626b69246346",
-                "score": 0.4422
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -3146,8 +2857,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-linglong-porcelain-dinnerware",
-              "marketplace-hot-pot-base-gift-box"
+              "marketplace-linglong-porcelain-dinnerware"
             ],
             "answer_is_correct": true
           },
@@ -3196,11 +2906,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_f58dec1a2a852b3931e3",
-                "score": 0.784
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -3263,11 +2970,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_f58dec1a2a852b3931e3",
-                "score": 0.6785
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -3922,11 +3626,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_fbab6b2ce552b83acc67",
-                "score": 0.7551
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4044,26 +3745,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 三坊七巷主题福州软木画## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。\n\n# 三坊七巷主题福州软木画\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 三坊七巷主题福州软木画## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。\n\n# 三坊七巷主题福州软木画\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_bad6bb75fa9467f88076",
-                "score": 0.7384
-              },
-              {
-                "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
-                "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.6029
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4077,8 +3766,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-cork-painting-sanfangqixiang",
-              "marketplace-fuzhou-bodiless-lacquer-vase"
+              "marketplace-cork-painting-sanfangqixiang"
             ],
             "answer_is_correct": true
           },
@@ -4127,29 +3815,20 @@
               {
                 "source": "catalog/marketplace-oolong-tea-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-oolong-tea-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_0999e205d28bcf3cbcb5",
-                "score": 0.7731
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.628
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6193
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4214,29 +3893,20 @@
               {
                 "source": "catalog/marketplace-gutian-bamboo-fungus.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%8f%a4%e7%94%b0%e7%ab%b9%e8%8d%aa%e5%b9%b2%e8%b4%a7/",
-                "product_id": "marketplace-gutian-bamboo-fungus",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_7d9d280b63656f507d7a",
-                "score": 0.6539
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.5712
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.5707
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4301,20 +3971,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.8017
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.7019
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4378,20 +4042,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_72e8fcb63a9bdfe437e5",
-                "score": 0.7497
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.6483
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4455,20 +4113,14 @@
               {
                 "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%8e%b2%e7%8f%91%e7%93%b7%e9%a4%90%e5%85%b7%e5%a5%97%e8%a3%85/",
-                "product_id": "marketplace-linglong-porcelain-dinnerware",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_2db8320fb090f4361bd4",
-                "score": 0.8038
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_72e8fcb63a9bdfe437e5",
-                "score": 0.604
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4526,26 +4178,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n\n# 福州脱胎漆器流纹花瓶摆件\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n\n# 福州脱胎漆器流纹花瓶摆件\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8507f673045fbde510fa",
-                "score": 0.8079
-              },
-              {
-                "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
-                "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6515
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4559,8 +4199,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-fuzhou-bodiless-lacquer-vase",
-              "marketplace-cork-painting-sanfangqixiang"
+              "marketplace-fuzhou-bodiless-lacquer-vase"
             ],
             "answer_is_correct": true
           },
@@ -4603,26 +4242,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。\n\n# 正宗火锅底料礼盒\n\n## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 包装：单件礼盒。\n- 起订量：10 件起订。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。\n\n# 正宗火锅底料礼盒\n\n## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-hot-pot-base-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_d987708f626b69246346",
-                "score": 0.8353
-              },
-              {
-                "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
-                "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.5473
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4636,8 +4263,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-hot-pot-base-gift-box",
-              "marketplace-jingdezhen-blue-white-dragon-plate"
+              "marketplace-hot-pot-base-gift-box"
             ],
             "answer_is_correct": true
           },
@@ -4680,26 +4306,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 潮汕沙茶酱## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。\n\n# 潮汕沙茶酱\n\n## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n 已公开目录信息\n\n- 茶产区：福建茶产区。\n- 规格：100g/罐。\n- 包装：双罐礼盒。\n- 公开展示价：¥128。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 潮汕沙茶酱## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。\n\n# 潮汕沙茶酱\n\n## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%bd%ae%e6%b1%95%e6%b2%99%e8%8c%b6%e9%85%b1/",
-                "product_id": "marketplace-chaoshan-shacha-sauce",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8bc922f67aa1f18ec324",
-                "score": 0.8026
-              },
-              {
-                "source": "catalog/marketplace-oolong-tea-gift-box.md",
-                "source_url": "https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-oolong-tea-gift-box",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_0999e205d28bcf3cbcb5",
-                "score": 0.5547
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4713,8 +4327,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-chaoshan-shacha-sauce",
-              "marketplace-oolong-tea-gift-box"
+              "marketplace-chaoshan-shacha-sauce"
             ],
             "answer_is_correct": true
           },
@@ -4757,26 +4370,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 寿山石瑞兽摆件## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。\n\n# 寿山石瑞兽摆件\n\n## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。",
+            "answer": "根据已检索资料：# 寿山石瑞兽摆件## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。\n\n# 寿山石瑞兽摆件\n\n## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-shoushan-stone-auspicious-beast",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_48da872a88213cb6ace4",
-                "score": 0.7927
-              },
-              {
-                "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
-                "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8507f673045fbde510fa",
-                "score": 0.5532
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4790,8 +4391,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-shoushan-stone-auspicious-beast",
-              "marketplace-fuzhou-bodiless-lacquer-vase"
+              "marketplace-shoushan-stone-auspicious-beast"
             ],
             "answer_is_correct": true
           },
@@ -4840,29 +4440,20 @@
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.71
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.6988
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-shoushan-stone-auspicious-beast",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_e38dfaeff022a9193cf8",
-                "score": 0.618
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -4930,38 +4521,26 @@
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6264
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.6009
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.5813
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-hot-pot-base-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_b8b0209bb507540b0044",
-                "score": 0.5773
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -5028,20 +4607,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.7265
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.7076
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -5099,26 +4672,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 玲珑瓷餐具套装## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 玲珑瓷餐具套装\n\n# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。",
+            "answer": "根据已检索资料：# 玲珑瓷餐具套装## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 规格：56 头套装。\n- 材质：骨瓷。\n- 微波炉适用。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 玲珑瓷餐具套装",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%8e%b2%e7%8f%91%e7%93%b7%e9%a4%90%e5%85%b7%e5%a5%97%e8%a3%85/",
-                "product_id": "marketplace-linglong-porcelain-dinnerware",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_fcc3db75e7a8e546b596",
-                "score": 0.6555
-              },
-              {
-                "source": "catalog/marketplace-hot-pot-base-gift-box.md",
-                "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_d987708f626b69246346",
-                "score": 0.4422
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -5132,8 +4693,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-linglong-porcelain-dinnerware",
-              "marketplace-hot-pot-base-gift-box"
+              "marketplace-linglong-porcelain-dinnerware"
             ],
             "answer_is_correct": true
           },
@@ -5182,11 +4742,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_f58dec1a2a852b3931e3",
-                "score": 0.784
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -5249,11 +4806,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_f58dec1a2a852b3931e3",
-                "score": 0.6785
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -5908,11 +5462,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_fbab6b2ce552b83acc67",
-                "score": 0.7551
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6030,26 +5581,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 三坊七巷主题福州软木画## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。\n\n# 三坊七巷主题福州软木画\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 三坊七巷主题福州软木画## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。\n\n# 三坊七巷主题福州软木画\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_bad6bb75fa9467f88076",
-                "score": 0.7384
-              },
-              {
-                "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
-                "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.6029
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6063,8 +5602,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-cork-painting-sanfangqixiang",
-              "marketplace-fuzhou-bodiless-lacquer-vase"
+              "marketplace-cork-painting-sanfangqixiang"
             ],
             "answer_is_correct": true
           },
@@ -6113,29 +5651,20 @@
               {
                 "source": "catalog/marketplace-oolong-tea-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-oolong-tea-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_0999e205d28bcf3cbcb5",
-                "score": 0.7731
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.628
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6193
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6255,20 +5784,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.8017
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.7019
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6332,20 +5855,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_72e8fcb63a9bdfe437e5",
-                "score": 0.7497
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.6483
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6409,20 +5926,14 @@
               {
                 "source": "catalog/marketplace-linglong-porcelain-dinnerware.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%8e%b2%e7%8f%91%e7%93%b7%e9%a4%90%e5%85%b7%e5%a5%97%e8%a3%85/",
-                "product_id": "marketplace-linglong-porcelain-dinnerware",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_2db8320fb090f4361bd4",
-                "score": 0.8038
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_72e8fcb63a9bdfe437e5",
-                "score": 0.604
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6480,26 +5991,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n\n# 福州脱胎漆器流纹花瓶摆件\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n- 公开展示价：¥328。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。\n\n# 福州脱胎漆器流纹花瓶摆件\n\n## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8507f673045fbde510fa",
-                "score": 0.8079
-              },
-              {
-                "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
-                "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.6515
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6513,8 +6012,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-fuzhou-bodiless-lacquer-vase",
-              "marketplace-cork-painting-sanfangqixiang"
+              "marketplace-fuzhou-bodiless-lacquer-vase"
             ],
             "answer_is_correct": true
           },
@@ -6557,26 +6055,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。\n\n# 正宗火锅底料礼盒\n\n## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n## 已公开目录信息\n\n- 产地：江西景德镇。\n- 包装：单件礼盒。\n- 起订量：10 件起订。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 正宗火锅底料礼盒## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。\n\n# 正宗火锅底料礼盒\n\n## 已公开目录信息\n\n- 产地：四川成都。\n- 包装：4 袋礼盒。\n- 规格：每袋 200g。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-hot-pot-base-gift-box.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%ad%a3%e5%ae%97%e7%81%ab%e9%94%85%e5%ba%95%e6%96%99%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-hot-pot-base-gift-box",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_d987708f626b69246346",
-                "score": 0.8353
-              },
-              {
-                "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
-                "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.5473
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6590,8 +6076,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-hot-pot-base-gift-box",
-              "marketplace-jingdezhen-blue-white-dragon-plate"
+              "marketplace-hot-pot-base-gift-box"
             ],
             "answer_is_correct": true
           },
@@ -6634,26 +6119,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 潮汕沙茶酱## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。\n\n# 潮汕沙茶酱\n\n## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n 已公开目录信息\n\n- 茶产区：福建茶产区。\n- 规格：100g/罐。\n- 包装：双罐礼盒。\n- 公开展示价：¥128。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
+            "answer": "根据已检索资料：# 潮汕沙茶酱## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。\n\n# 潮汕沙茶酱\n\n## 已公开目录信息\n\n- 产地：广东潮汕。\n- 规格：300g/瓶。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-chaoshan-shacha-sauce.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%bd%ae%e6%b1%95%e6%b2%99%e8%8c%b6%e9%85%b1/",
-                "product_id": "marketplace-chaoshan-shacha-sauce",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8bc922f67aa1f18ec324",
-                "score": 0.8026
-              },
-              {
-                "source": "catalog/marketplace-oolong-tea-gift-box.md",
-                "source_url": "https://txs.wyfdev.com/product/%e4%b9%8c%e9%be%99%e8%8c%b6%e5%8f%b6%e7%a4%bc%e7%9b%92/",
-                "product_id": "marketplace-oolong-tea-gift-box",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_0999e205d28bcf3cbcb5",
-                "score": 0.5547
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6667,8 +6140,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-chaoshan-shacha-sauce",
-              "marketplace-oolong-tea-gift-box"
+              "marketplace-chaoshan-shacha-sauce"
             ],
             "answer_is_correct": true
           },
@@ -6711,26 +6183,14 @@
           ],
           "final": {
             "result": "answer",
-            "answer": "根据已检索资料：# 寿山石瑞兽摆件## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。\n\n# 寿山石瑞兽摆件\n\n## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。\n\n# 福州脱胎漆器流纹花瓶摆件## 已公开目录信息\n\n- 产地：福建福州。\n- 包装：单件礼盒。",
+            "answer": "根据已检索资料：# 寿山石瑞兽摆件## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。\n\n# 寿山石瑞兽摆件\n\n## 已公开目录信息\n\n- 产地：福州晋安区寿山乡。\n- 包装：单件礼盒。## 未覆盖信息\n\n本资料未写明的信息，转人工确认。",
             "handoff_reason": null,
             "sources": [
               {
                 "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-shoushan-stone-auspicious-beast",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_48da872a88213cb6ace4",
-                "score": 0.7927
-              },
-              {
-                "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
-                "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
-                "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_8507f673045fbde510fa",
-                "score": 0.5532
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6744,8 +6204,7 @@
           "actual": {
             "result": "answer",
             "source_product_ids": [
-              "marketplace-shoushan-stone-auspicious-beast",
-              "marketplace-fuzhou-bodiless-lacquer-vase"
+              "marketplace-shoushan-stone-auspicious-beast"
             ],
             "answer_is_correct": true
           },
@@ -6794,29 +6253,20 @@
               {
                 "source": "catalog/marketplace-cork-painting-sanfangqixiang.md",
                 "source_url": "https://txs.wyfdev.com/product/%e4%b8%89%e5%9d%8a%e4%b8%83%e5%b7%b7%e4%b8%bb%e9%a2%98%e7%a6%8f%e5%b7%9e%e8%bd%af%e6%9c%a8%e7%94%bb/",
-                "product_id": "marketplace-cork-painting-sanfangqixiang",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_18193f21cc8ae2aa5021",
-                "score": 0.71
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-fuzhou-bodiless-lacquer-vase.md",
                 "source_url": "https://txs.wyfdev.com/product/%e7%a6%8f%e5%b7%9e%e8%84%b1%e8%83%8e%e6%bc%86%e5%99%a8%e6%b5%81%e7%ba%b9%e8%8a%b1%e7%93%b6%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-fuzhou-bodiless-lacquer-vase",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_1831678d3f72527ecc4e",
-                "score": 0.6988
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-shoushan-stone-auspicious-beast.md",
                 "source_url": "https://txs.wyfdev.com/product/%e5%af%bf%e5%b1%b1%e7%9f%b3%e7%91%9e%e5%85%bd%e6%91%86%e4%bb%b6/",
-                "product_id": "marketplace-shoushan-stone-auspicious-beast",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_e38dfaeff022a9193cf8",
-                "score": 0.618
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -6940,20 +6390,14 @@
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-high-foot-cup.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%ab%98%e8%b6%b3%e6%9d%af/",
-                "product_id": "marketplace-jingdezhen-blue-white-high-foot-cup",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_151de69dbe6d12c27a3a",
-                "score": 0.7265
+                "updated_at": "2026-09-13"
               },
               {
                 "source": "catalog/marketplace-jingdezhen-blue-white-dragon-plate.md",
                 "source_url": "https://txs.wyfdev.com/product/%e6%99%af%e5%be%b7%e9%95%87%e9%9d%92%e8%8a%b1%e9%be%99%e7%ba%b9%e7%93%b7%e7%9b%98/",
-                "product_id": "marketplace-jingdezhen-blue-white-dragon-plate",
                 "document_type": "product",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_a4dd5cb44b62ea42a772",
-                "score": 0.7076
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -7072,11 +6516,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_f58dec1a2a852b3931e3",
-                "score": 0.784
+                "updated_at": "2026-09-13"
               }
             ]
           },
@@ -7786,11 +7227,8 @@
               {
                 "source": "catalog/platform-cooperation.md",
                 "source_url": "https://txs.wyfdev.com/cooperation-apply/",
-                "product_id": "GENERAL",
                 "document_type": "policy",
-                "updated_at": "2026-09-13",
-                "chunk_id": "chunk_fbab6b2ce552b83acc67",
-                "score": 0.7551
+                "updated_at": "2026-09-13"
               }
             ]
           },

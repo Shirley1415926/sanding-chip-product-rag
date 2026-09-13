@@ -3,7 +3,7 @@
 This command is deliberately excluded from unit tests and normal acceptance
 scripts.  It reads LLM_API_BASE, LLM_API_KEY and LLM_MODEL only from a local
 ``.env`` file, never prints the key, and redacts common secret/contact patterns
-before writing the committed trace artifact.
+before writing local trace artifacts.
 """
 
 from __future__ import annotations
@@ -65,12 +65,14 @@ def _arguments() -> object:
     parser.add_argument(
         "--traces-output",
         type=Path,
-        default=PROJECT_ROOT / "docs" / "GENERATION_EVALUATION_TRACES.json",
+        default=None,
+        help="optional trace JSON path; real runs default to gitignored data/runtime/",
     )
     parser.add_argument(
         "--report-output",
         type=Path,
-        default=PROJECT_ROOT / "docs" / "GENERATION_EVALUATION_REPORT.md",
+        default=None,
+        help="optional Markdown report path; real runs default to gitignored data/runtime/",
     )
     return parser.parse_args()
 
@@ -209,12 +211,16 @@ def _run_cases(
             handoff_required = payload.handoff_required
             handoff_reason = payload.handoff_reason
             returned_sources = payload.sources
+            returned_product_ids = payload.internal_returned_product_ids
+            verified_used_source_ids = payload.internal_used_source_ids
         except Exception as exc:  # Preserve a redacted diagnostic without headers, keys or raw responses.
             runtime_error = redact_text(str(exc))[:400] or type(exc).__name__
             answer = ""
             handoff_required = False
             handoff_reason = "evaluation_runtime_error"
             returned_sources = []
+            returned_product_ids = []
+            verified_used_source_ids = []
         elapsed_ms = (time.perf_counter_ns() - started) / 1_000_000
         llm_called = llm.calls > before_calls
         retrieval_sources = _top_k_trace(matches)
@@ -225,6 +231,7 @@ def _run_cases(
             handoff_required=handoff_required,
             handoff_reason=handoff_reason,
             returned_sources=returned_sources,
+            returned_product_ids=returned_product_ids,
             evidence_text=evidence_text,
             llm_called=llm_called,
             known_fact_values=known_facts,
@@ -248,6 +255,8 @@ def _run_cases(
                 "llm_called": llm_called,
                 "retrieval_sources": retrieval_sources,
                 "returned_sources": returned_sources,
+                "returned_source_product_ids": returned_product_ids,
+                "verified_used_source_ids": verified_used_source_ids,
                 "model": model_name,
                 "elapsed_ms": round(elapsed_ms, 3),
                 "runtime_error": runtime_error,
@@ -281,7 +290,7 @@ def _render_report(report: dict[str, Any]) -> str:
                 "./.venv/bin/python scripts/run_generation_evaluation.py",
                 "```",
                 "",
-                "这不会使用环境变量回退值，也不会在普通单元测试或 CI 中调用 API。",
+                "这不会使用环境变量回退值，也不会在普通单元测试或 CI 中调用 API。真实运行的原始回答和 trace 默认写入 gitignore 的 `data/runtime/generation_evaluation/latest/`，不会自动进入提交。",
                 "",
                 "## 自动结果",
                 "",
@@ -289,7 +298,7 @@ def _render_report(report: dict[str, Any]) -> str:
                 "",
                 "## 人工复核结果",
                 "",
-                "未运行，因此没有可供人工复核的真实模型回答；不能把准备清单当作人工复核已完成。",
+                "未运行，因此没有可供人工复核的真实模型回答；不能把准备清单当作人工复核已完成。真实运行时，所有自动失败题和至少 20%“已调用 LLM 且自动通过”题须人工复核；硬安全门题不计入生成回答抽样。",
                 "",
                 "## 已知边界",
                 "",
@@ -331,7 +340,7 @@ def _render_report(report: dict[str, Any]) -> str:
             "",
             "## 人工复核结果",
             "",
-            f"规则要求复核全部自动失败题，以及自动通过题中的确定性 20% 抽样。需要复核 {summary['manual_review']['required_case_count']} 题；已完成 {summary['manual_review']['completed_case_count']} 题；待人工复核 {summary['manual_review']['pending_case_count']} 题；人工判定通过 {summary['manual_review']['reviewer_pass_count']}，失败 {summary['manual_review']['reviewer_fail_count']}。",
+            f"规则要求复核全部自动失败题，以及“已调用 LLM 且自动通过”题中的确定性 20% 抽样；硬安全门题不进入生成回答抽样。需要复核 {summary['manual_review']['required_case_count']} 题；已完成 {summary['manual_review']['completed_case_count']} 题；待人工复核 {summary['manual_review']['pending_case_count']} 题；人工判定通过 {summary['manual_review']['reviewer_pass_count']}，失败 {summary['manual_review']['reviewer_fail_count']}。",
             "",
         ]
     )
@@ -362,8 +371,22 @@ def _render_report(report: dict[str, Any]) -> str:
 
 
 def _write_outputs(args: object, report: dict[str, Any]) -> None:
-    traces_path = args.traces_output if args.traces_output.is_absolute() else PROJECT_ROOT / args.traces_output
-    report_path = args.report_output if args.report_output.is_absolute() else PROJECT_ROOT / args.report_output
+    if args.traces_output is None:
+        traces_path = (
+            PROJECT_ROOT / "docs" / "GENERATION_EVALUATION_TRACES.json"
+            if args.prepare_only
+            else PROJECT_ROOT / "data" / "runtime" / "generation_evaluation" / "latest" / "GENERATION_EVALUATION_TRACES.json"
+        )
+    else:
+        traces_path = args.traces_output if args.traces_output.is_absolute() else PROJECT_ROOT / args.traces_output
+    if args.report_output is None:
+        report_path = (
+            PROJECT_ROOT / "docs" / "GENERATION_EVALUATION_REPORT.md"
+            if args.prepare_only
+            else PROJECT_ROOT / "data" / "runtime" / "generation_evaluation" / "latest" / "GENERATION_EVALUATION_REPORT.md"
+        )
+    else:
+        report_path = args.report_output if args.report_output.is_absolute() else PROJECT_ROOT / args.report_output
     traces_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     traces_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

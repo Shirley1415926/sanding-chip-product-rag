@@ -36,7 +36,6 @@ HANDOFF_CASE = {
 }
 SOURCE = {
     "source": "catalog/cork.md",
-    "product_id": "cork",
     "source_url": "https://txs.wyfdev.com/product/cork/",
 }
 
@@ -73,6 +72,7 @@ class GenerationEvaluationTests(unittest.TestCase):
             handoff_required=False,
             handoff_reason=None,
             returned_sources=[SOURCE],
+            returned_product_ids=["cork"],
             evidence_text="产地：福建福州。包装：单件礼盒。",
             llm_called=True,
             known_fact_values=["福建福州", "单件礼盒", "四川成都"],
@@ -89,6 +89,7 @@ class GenerationEvaluationTests(unittest.TestCase):
             handoff_required=False,
             handoff_reason=None,
             returned_sources=[SOURCE],
+            returned_product_ids=["cork"],
             evidence_text="产地：福建福州。包装：单件礼盒。",
             llm_called=True,
             known_fact_values=["福建福州", "单件礼盒", "四川成都"],
@@ -103,6 +104,7 @@ class GenerationEvaluationTests(unittest.TestCase):
             handoff_required=True,
             handoff_reason="inventory",
             returned_sources=[],
+            returned_product_ids=[],
             evidence_text="",
             llm_called=False,
             known_fact_values=[],
@@ -117,6 +119,7 @@ class GenerationEvaluationTests(unittest.TestCase):
             handoff_required=True,
             handoff_reason="inventory",
             returned_sources=[],
+            returned_product_ids=[],
             evidence_text="",
             llm_called=True,
             known_fact_values=[],
@@ -129,16 +132,30 @@ class GenerationEvaluationTests(unittest.TestCase):
     def test_review_plan_contains_all_failures_and_twenty_percent_of_passes(self) -> None:
         traces = []
         for index in range(10):
-            traces.append({"case_id": f"P{index}", "evaluation": {"automatic_overall_pass": True}})
-        traces.append({"case_id": "F1", "evaluation": {"automatic_overall_pass": False}})
+            traces.append(
+                {"case_id": f"P{index}", "llm_called": True, "evaluation": {"automatic_overall_pass": True}}
+            )
+        traces.append({"case_id": "F1", "llm_called": False, "evaluation": {"automatic_overall_pass": False}})
         selected = review_selection(traces)
         self.assertIn("F1", selected)
         self.assertEqual(len(selected), 3)  # one failure plus ceil(10 * 20%) pass cases
+
+    def test_review_sample_excludes_hard_safety_handoffs(self) -> None:
+        traces = [
+            {"case_id": "L1", "llm_called": True, "evaluation": {"automatic_overall_pass": True}},
+            {"case_id": "L2", "llm_called": True, "evaluation": {"automatic_overall_pass": True}},
+            {"case_id": "S1", "llm_called": False, "evaluation": {"automatic_overall_pass": True}},
+            {"case_id": "S2", "llm_called": False, "evaluation": {"automatic_overall_pass": True}},
+        ]
+        selected = review_selection(traces)
+        self.assertEqual(len(selected), 1)  # ceil(2 model answers * 20%)
+        self.assertFalse({"S1", "S2"}.intersection(selected))
 
     def test_manual_review_summary_keeps_pending_state_visible(self) -> None:
         traces = [
             {
                 "case_id": "P1",
+                "llm_called": True,
                 "evaluation": {
                     "automatic_overall_pass": True,
                     "dimensions": {
@@ -152,6 +169,7 @@ class GenerationEvaluationTests(unittest.TestCase):
             },
             {
                 "case_id": "F1",
+                "llm_called": False,
                 "evaluation": {
                     "automatic_overall_pass": False,
                     "dimensions": {

@@ -117,7 +117,9 @@ def _trace_case(service: RAGAnswerService, case: dict[str, Any]) -> dict[str, An
     payload = service.ask(query)
     expected_product_ids = set(str(value) for value in case.get("expected_product_ids", []))
     top_k = _top_k_trace(raw_matches)
-    returned_product_ids = [str(source["product_id"]) for source in payload.sources]
+    # Product IDs remain an internal evaluation mapping.  Public ``sources``
+    # intentionally contain only display-safe provenance fields.
+    returned_product_ids = payload.internal_returned_product_ids
     source_hit_at_1 = bool(top_k and top_k[0]["product_id"] in expected_product_ids)
     source_hit_at_3 = any(
         match["product_id"] in expected_product_ids for match in top_k[:3]

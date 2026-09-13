@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import re
+from typing import Any
 
 from .chroma_store import ChromaStore
 from .domain import AnswerPayload, RetrievedChunk
@@ -73,14 +75,28 @@ class RAGAnswerService:
         if self._requires_explicit_fact(question, matches):
             return self._handoff("explicit_fact_not_found")
 
-        context = self._format_context(matches)
-        answer = self._llm.answer(question, context, HANDOFF_MESSAGE).strip()
+        evidence_by_id = self._evidence_by_id(matches)
+        context = self._format_context(evidence_by_id)
+        raw_response = self._llm.answer(question, context, HANDOFF_MESSAGE).strip()
+        generated = self._parse_cited_response(raw_response)
+        if generated is None:
+            return self._handoff("llm_invalid_response_format")
+        answer, used_source_ids = generated
         if not answer or answer == HANDOFF_MESSAGE:
             return self._handoff("llm_insufficient_evidence")
+        if self._contains_internal_identifier(answer, evidence_by_id):
+            return self._handoff("llm_internal_identifier_disclosure")
+        if not used_source_ids or any(source_id not in evidence_by_id for source_id in used_source_ids):
+            return self._handoff("llm_invalid_source_citation")
+        sources, returned_product_ids = self._returned_sources(used_source_ids, evidence_by_id)
+        if not sources:
+            return self._handoff("llm_invalid_source_citation")
         return AnswerPayload(
             answer=answer,
-            sources=self._deduplicated_sources(matches),
+            sources=sources,
             handoff_required=False,
+            internal_used_source_ids=used_source_ids,
+            internal_returned_product_ids=returned_product_ids,
         )
 
     def trace_retrieval(self, question: str) -> tuple[str | None, list[RetrievedChunk]]:
@@ -99,16 +115,45 @@ class RAGAnswerService:
         return None, self._retriever.query(question, self._top_k)
 
     @staticmethod
-    def _format_context(matches: list[RetrievedChunk]) -> str:
+    def _evidence_by_id(matches: list[RetrievedChunk]) -> dict[str, RetrievedChunk]:
+        """Assign deterministic, request-scoped IDs without exposing metadata IDs."""
+        return {f"S{index}": match for index, match in enumerate(matches, start=1)}
+
+    @staticmethod
+    def _format_context(evidence_by_id: dict[str, RetrievedChunk]) -> str:
         return "\n\n".join(
-            "\n".join(
-                (
-                    f"[证据 {index}] source={match.metadata['source']}",
-                    f"product_id={match.metadata['product_id']}; type={match.metadata['document_type']}; updated_at={match.metadata['updated_at']}",
-                    match.text,
-                )
-            )
-            for index, match in enumerate(matches, start=1)
+            "\n".join((f"[{source_id}]", "公开证据：", match.text))
+            for source_id, match in evidence_by_id.items()
+        )
+
+    @staticmethod
+    def _parse_cited_response(raw_response: str) -> tuple[str, list[str]] | None:
+        """Accept only the small response contract required for source binding."""
+        try:
+            decoded = json.loads(raw_response)
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(decoded, dict) or set(decoded) != {"answer", "used_source_ids"}:
+            return None
+        answer = decoded.get("answer")
+        source_ids = decoded.get("used_source_ids")
+        if not isinstance(answer, str) or not isinstance(source_ids, list):
+            return None
+        if any(not isinstance(source_id, str) or not re.fullmatch(r"S[1-9]\d*", source_id) for source_id in source_ids):
+            return None
+        if len(set(source_ids)) != len(source_ids):
+            return None
+        return answer.strip(), source_ids
+
+    @staticmethod
+    def _contains_internal_identifier(answer: str, evidence_by_id: dict[str, RetrievedChunk]) -> bool:
+        """Fail closed if a model tries to reveal routing identifiers to a user."""
+        if re.search(r"(?i)product[_ -]?id", answer) or re.search(r"S[1-9]\d*", answer):
+            return True
+        answer_normalized = answer.lower()
+        return any(
+            str(match.metadata["product_id"]).lower() in answer_normalized
+            for match in evidence_by_id.values()
         )
 
     @staticmethod
@@ -122,10 +167,18 @@ class RAGAnswerService:
         cooperation query similarly prefers policy chunks so product neighbors do
         not appear as unrelated sources in a platform answer.
         """
+        candidate_names = {
+            str(match.metadata.get("product_name", ""))
+            for match in matches
+            if str(match.metadata.get("product_name", ""))
+        }
         named_matches = [
             match
             for match in matches
-            if (product_name := str(match.metadata.get("product_name", ""))) and product_name in question
+            if (product_name := str(match.metadata.get("product_name", "")))
+            and RAGAnswerService._product_name_appears_in_question(
+                product_name, question, candidate_names
+            )
         ]
         if named_matches:
             return named_matches
@@ -136,6 +189,29 @@ class RAGAnswerService:
             if policy_matches:
                 return policy_matches
         return matches
+
+    @staticmethod
+    def _product_name_appears_in_question(
+        product_name: str, question: str, candidate_names: set[str]
+    ) -> bool:
+        """Recognize an explicit full name or a distinctive three-character name fragment.
+
+        This lets a comparison such as “软木画和乌龙茶叶礼盒” retain both
+        product contexts while leaving non-name selection questions to normal
+        retrieval.  Two-character generic words such as “礼盒” are not enough.
+        """
+        compact_question = re.sub(r"\s+", "", question)
+        compact_name = re.sub(r"\s+", "", product_name)
+        if compact_name and compact_name in compact_question:
+            return True
+        for index in range(max(0, len(compact_name) - 2)):
+            fragment = compact_name[index : index + 3]
+            if fragment not in compact_question:
+                continue
+            matches_this_name_only = sum(fragment in re.sub(r"\s+", "", name) for name in candidate_names)
+            if matches_this_name_only == 1:
+                return True
+        return False
 
     @staticmethod
     def _requires_explicit_fact(question: str, matches: list[RetrievedChunk]) -> bool:
@@ -166,17 +242,21 @@ class RAGAnswerService:
         return False
 
     @staticmethod
-    def _deduplicated_sources(matches: list[RetrievedChunk]) -> list[dict[str, object]]:
+    def _returned_sources(
+        used_source_ids: list[str], evidence_by_id: dict[str, RetrievedChunk]
+    ) -> tuple[list[dict[str, Any]], list[str]]:
+        """Map only verified model citations to public, deduplicated provenance."""
         seen: set[str] = set()
-        sources: list[dict[str, object]] = []
-        for match in matches:
-            # A caller normally needs a document-level provenance list, not four
-            # duplicate rows just because four nearby chunks came from one file.
+        sources: list[dict[str, Any]] = []
+        product_ids: list[str] = []
+        for source_id in used_source_ids:
+            match = evidence_by_id[source_id]
             source = str(match.metadata["source"])
             if source not in seen:
-                sources.append(match.source_dict())
+                sources.append(match.public_source_dict())
+                product_ids.append(str(match.metadata["product_id"]))
                 seen.add(source)
-        return sources
+        return sources, product_ids
 
     @staticmethod
     def _handoff(reason: str) -> AnswerPayload:

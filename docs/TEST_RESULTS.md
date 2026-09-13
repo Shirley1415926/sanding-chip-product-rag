@@ -10,7 +10,7 @@ v0.1 早期的 SDX 电子产品资料只用于 RAG 技术链路的初始样例�
 | --- | --- | --- |
 | `.venv/bin/python scripts/run_acceptance.py` | **18 / 18 通过** | Chroma + `HashingTestEmbedder` + `ContextEchoLLM`，可离线重复 |
 | `.venv/bin/python scripts/run_acceptance.py --semantic` | **18 / 18 通过** | Chroma + `BAAI/bge-small-zh-v1.5`；生成边界仍使用测试 LLM，不使用或保存任何 API Key |
-| `PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -v` | **11 / 11 通过** | Metadata、商城公开来源、切分保留、串商品防护与安全门检查 |
+| `PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -v` | **33 / 33 通过** | Metadata、商城公开来源、切分保留、串商品防护、安全门、结构化引用和内部 ID 隔离检查 |
 | `PYTHONPATH=src .venv/bin/python -m sanding_rag.cli ingest data/sample` | **11 份资料 / 33 chunks** | 已清空旧 collection 后的实际本地摄取 |
 
 验收使用真实 Markdown 导入、切分、Chroma 接口、Top-K 检索、安全门和来源返回。离线与语义验收的 LLM 使用 `ContextEchoLLM`，因此结果验证的是证据、来源与安全策略，不构成生产 LLM 文案质量或订单系统承诺。

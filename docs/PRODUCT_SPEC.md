@@ -42,7 +42,7 @@ v0.1 电子产品资料只是 RAG 技术链路的初始样例，已不属于当�
 
 ## 4. 回答与安全规则
 
-每个有知识依据的回答必须返回 `answer` 和 `sources`；每个来源至少包含 `source`、`source_url`、`product_id`、`document_type`、`updated_at`、`chunk_id`、`score`。
+每个有知识依据的回答必须返回 `answer` 和 `sources`；每个用户可见来源包含 `source`、`source_url`、`document_type`、`updated_at`。`product_id`、chunk ID 与检索分数仅用于后端匹配、测试和调试，不能出现在模型上下文、最终答案或用户来源。模型须以请求级 `S1`、`S2` 等证据 ID 声明实际使用的证据；后端只展示验证成功的映射来源，格式或引用无效即转人工。
 
 固定转人工文案：
 

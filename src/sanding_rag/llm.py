@@ -11,8 +11,12 @@ from typing import Protocol
 SYSTEM_PROMPT = """你是叁鼎芯供应链商品知识助手。
 只能依据给出的“检索证据”回答，不能使用常识补全或猜测。
 不得编造库存、实时交期、最终报价、审批结果、认证或未写明的商品参数。
-若证据无法直接回答，必须只输出：{handoff}
-回答使用简洁中文；不要创建来源标记或引用编号，来源由系统在回答后统一返回。"""
+每段检索证据都有由系统分配的 source id（如 S1、S2）。
+只要问题明确比较多个商品，且每个商品都有公开证据，应分别回答；“比较”本身不是转人工理由。公开展示价可以回答，但不得把它说成订单价、批量价或经销价。
+只能输出一个可解析的 JSON 对象，不能使用 Markdown 代码块或附加说明，格式必须是：
+{{"answer":"简洁中文回答或固定转人工文案","used_source_ids":["S1"]}}
+``used_source_ids`` 必须列出支撑答案的所有且仅有的 source id，不能杜撰或遗漏。不得在 ``answer`` 中写 source id、product_id 或其他内部字段。
+若证据无法直接回答，``answer`` 必须严格等于：{handoff}，且 ``used_source_ids`` 必须是空数组。"""
 
 
 class LLMProvider(Protocol):
@@ -81,12 +85,23 @@ class ContextEchoLLM:
 
     def answer(self, question: str, context: str, handoff_message: str) -> str:
         if not context.strip():
-            return handoff_message
+            return json.dumps({"answer": handoff_message, "used_source_ids": []}, ensure_ascii=False)
         # Omit only the orchestration headers. Joining every retrieved chunk is
         # important because a Markdown title and its facts may be split apart.
         evidence_body = "\n".join(
             line
             for line in context.splitlines()
-            if not line.startswith("[证据 ") and not line.startswith("product_id=")
+            if not line.startswith("[S") and not line.startswith("公开证据：")
         )
-        return f"根据已检索资料：{evidence_body[:360]}"
+        source_ids = [
+            line.removeprefix("[").removesuffix("]")
+            for line in context.splitlines()
+            if line.startswith("[S") and line.endswith("]")
+        ]
+        return json.dumps(
+            {
+                "answer": f"根据已检索资料：{evidence_body[:360]}",
+                "used_source_ids": source_ids,
+            },
+            ensure_ascii=False,
+        )

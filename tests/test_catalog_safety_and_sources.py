@@ -103,7 +103,9 @@ class CatalogSourceAndSafetyTests(unittest.TestCase):
             min_relevance=0.45,
         ).ask("平台有供应商入驻入口吗？")
         self.assertFalse(payload.handoff_required)
-        self.assertEqual([source["product_id"] for source in payload.sources], ["GENERAL"])
+        self.assertEqual(payload.internal_returned_product_ids, ["GENERAL"])
+        self.assertEqual([source["source"] for source in payload.sources], ["catalog/platform-cooperation.md"])
+        self.assertFalse(any("product_id" in source for source in payload.sources))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 {
   "status": "not_run",
   "reason": "prepare-only：未读取 .env，也未调用真实 LLM",
-  "run_at": "2026-09-13T19:16:46+08:00",
+  "run_at": "2026-09-13T20:48:22+08:00",
   "dataset": "data/generation_evaluation_questions.json",
   "dataset_case_count": 26,
   "model": null,

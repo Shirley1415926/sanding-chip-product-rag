@@ -92,6 +92,7 @@ def evaluate_case(
     handoff_required: bool,
     handoff_reason: str | None,
     returned_sources: list[dict[str, Any]],
+    returned_product_ids: list[str] | None,
     evidence_text: str,
     llm_called: bool,
     known_fact_values: list[str],
@@ -102,7 +103,7 @@ def evaluate_case(
     answer_normalized = normalized(answer)
     evidence_normalized = normalized(evidence_text)
     returned_source_names = {str(source["source"]) for source in returned_sources}
-    returned_product_ids = {str(source["product_id"]) for source in returned_sources}
+    returned_product_ids = {str(product_id) for product_id in (returned_product_ids or [])}
 
     if must_handoff:
         expected_reason = case.get("expected_handoff_reason")
@@ -163,10 +164,15 @@ def evaluate_case(
     unsupported_facts = [
         value for value in disclosed_known_facts if normalized(value) not in evidence_normalized
     ]
-    unsupported_risk_terms = [
-        term for term in _RISK_TERMS
-        if normalized(term) in answer_normalized and normalized(term) not in evidence_normalized
-    ]
+    unsupported_risk_terms = (
+        []
+        if handoff_required
+        else [
+            term
+            for term in _RISK_TERMS
+            if normalized(term) in answer_normalized and normalized(term) not in evidence_normalized
+        ]
+    )
     groundedness_reasons = []
     if handoff_required:
         groundedness_reasons.append("可回答题被转人工")
@@ -205,9 +211,17 @@ def evaluate_case(
 
 
 def review_selection(traces: list[dict[str, Any]], seed: str = "generation-evaluation-v1") -> set[str]:
-    """Select all automatic failures plus a deterministic 20% sample of passes."""
+    """Select all failures plus 20% of successful model-generated answers.
+
+    Hard safety handoffs are verified by their own automated tests and are not
+    a sample population for evaluating generation quality.
+    """
     failures = [trace["case_id"] for trace in traces if not trace["evaluation"]["automatic_overall_pass"]]
-    passes = [trace["case_id"] for trace in traces if trace["evaluation"]["automatic_overall_pass"]]
+    passes = [
+        trace["case_id"]
+        for trace in traces
+        if trace["evaluation"]["automatic_overall_pass"] and trace.get("llm_called") is True
+    ]
     sample_size = math.ceil(len(passes) * 0.20)
     sample = sorted(
         passes,

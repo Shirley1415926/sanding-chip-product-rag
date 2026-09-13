@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -29,16 +29,18 @@ class RetrievedChunk:
     metadata: dict[str, str | int]
     score: float
 
-    def source_dict(self) -> dict[str, Any]:
-        """Return only fields that can be shown to an operator or caller."""
+    def public_source_dict(self) -> dict[str, Any]:
+        """Return document provenance that is safe to show to an end user.
+
+        ``product_id`` and chunk identifiers are implementation metadata.  They
+        remain on the retrieved chunk for routing and evaluation, but must never
+        cross the public answer boundary.
+        """
         return {
             "source": self.metadata["source"],
             "source_url": self.metadata["source_url"],
-            "product_id": self.metadata["product_id"],
             "document_type": self.metadata["document_type"],
             "updated_at": self.metadata["updated_at"],
-            "chunk_id": self.chunk_id,
-            "score": round(self.score, 4),
         }
 
 
@@ -48,6 +50,16 @@ class AnswerPayload:
     sources: list[dict[str, Any]]
     handoff_required: bool
     handoff_reason: str | None = None
+    # These fields are deliberately not serialized by ``to_dict``.  They let
+    # local evaluators prove source/product binding without exposing internal
+    # identifiers to callers of the CLI or a future user-facing API.
+    internal_used_source_ids: list[str] = field(default_factory=list, repr=False)
+    internal_returned_product_ids: list[str] = field(default_factory=list, repr=False)
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return {
+            "answer": self.answer,
+            "sources": self.sources,
+            "handoff_required": self.handoff_required,
+            "handoff_reason": self.handoff_reason,
+        }

@@ -6,7 +6,7 @@ v0.1 早期的 SDX 电子产品资料仅用于验证技术链路；它们不是�
 
 ## 当前 RAG 链路
 
-`Markdown 导入 → 自研结构/递归切分 → Metadata → Embedding → Chroma → Top-K 检索 → LLM 受控回答 + 来源`
+`Markdown 导入 → 自研结构/递归切分 → Metadata → Embedding → Chroma → Top-K 检索 → LLM 受控生成 + 引用 ID 验证 → 用户来源`
 
 第一批知识覆盖 10 个商城商品与 1 份平台合作说明：产地、包装、已公开展示价、已写明规格、起订量、定制或微波炉适用性等。资料只有在目录明确展示时才写入；不能据此回答库存、具体发货日期、订单级/批量/经销报价、食品保质期/配料/过敏原，或其他未公开的材质、认证与售后承诺。
 
@@ -44,7 +44,7 @@ python scripts/run_acceptance.py
 # 摄取 Markdown 文件或目录；front matter 必须包含五个业务 Metadata 字段
 sanding-rag ingest path/to/markdown-or-directory
 
-# 问答；输出 JSON，其中 sources 包含目录来源 URL
+# 问答；输出 JSON，其中 sources 只包含用户可见的目录来源 URL 与文档信息
 sanding-rag ask "问题"
 
 # 18 题可重复验收，采用测试 Embedding 与测试 LLM，不需要 API Key
@@ -59,11 +59,12 @@ python scripts/run_offline_evaluation.py
 # 运行独立的 27 题检索压力集，对照 Dense、BM25 和 rank-only RRF
 python scripts/run_retrieval_stress.py
 
-# 真实 LLM 回答质量评估：仅生成不调用 API 的透明准备报告
+# 真实 LLM 回答质量评估：仅生成不调用 API 的透明准备报告（写入 docs）
 python scripts/run_generation_evaluation.py --prepare-only
 
 # 显式真实评估：仅从本地 .env 读取 LLM_API_BASE、LLM_API_KEY、LLM_MODEL
-# 不属于普通单元测试或 CI，运行后还须完成脚本标记的人工复核。
+# 不属于普通单元测试或 CI；原始回答与 trace 默认写入 gitignore 的 data/runtime/，
+# 运行后还须完成脚本标记的人工复核。
 python scripts/run_generation_evaluation.py
 
 # 基础单元测试（标准库 unittest）
@@ -72,7 +73,7 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 ## 测试集与当前结果
 
-`data/test_questions.json` 含 18 道商城目录回归验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **26/26 通过**。
+`data/test_questions.json` 含 18 道商城目录回归验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **33/33 通过**。
 
 阈值不使用这 18 题调节，而使用独立的 32 题保留集。实际语义评估后，暂用 `MIN_RELEVANCE=0.60`：Source Hit@1/Hit@3 为 17/17，错误回答率为 0/32，正确转人工率为 15/15，串商品错误为 0。阈值对比和失败用例见 [EVALUATION_REPORT.md](docs/EVALUATION_REPORT.md)，完整逐题记录见 [EVALUATION_TRACES.json](docs/EVALUATION_TRACES.json)。
 
@@ -80,13 +81,15 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 另有独立的 27 题检索压力集，使用真实 BGE 比较 Dense、确定性中文 BM25 和 rank-only RRF：三者均为 Hit@1/Hit@3/MRR 100%、串商品 0，未出现 Hybrid 的明确质量收益，因此 `RETRIEVAL_MODE` 默认继续为 `dense`。完整方法、延迟和局限见 [HYBRID_RETRIEVAL_EXPERIMENT.md](docs/HYBRID_RETRIEVAL_EXPERIMENT.md)。
 
-`data/generation_evaluation_questions.json` 是独立的 26 题最终回答质量集，不修改也不参与 18 题回归、32 题安全或 27 题检索压力集。它同时检查公开商品回答与必须转人工的问题；显式脚本记录最终答案、检索证据、模型名、耗时、逐维规则结果，并选取所有失败题和至少 20% 自动通过题供人工复核。当前工作区没有 `.env` 的真实模型配置，因此最新报告处于 **not_run** 状态，不含虚构的模型指标或人工结论；见 [GENERATION_EVALUATION_REPORT.md](docs/GENERATION_EVALUATION_REPORT.md)。
+`data/generation_evaluation_questions.json` 是独立的 26 题最终回答质量集，不修改也不参与 18 题回归、32 题安全或 27 题检索压力集。它同时检查公开商品回答与必须转人工的问题；显式脚本记录最终答案、完整 Top-K `retrieval_sources`、模型验证后的 `returned_sources`、模型名、耗时和逐维规则结果。`product_id` 仅保留在后端匹配与调试 trace，绝不进入模型上下文、最终回答或用户可见来源。
+
+一次本地 DeepSeek 预修复运行已真实执行，但原始回答与报告只保存在 gitignore 的本地证据目录，未进入提交。该运行发现 G11 的多商品比较误转人工，以及 G13/G14/G15/G17 的无关来源绑定问题；脱敏摘要见 [GENERATION_EVALUATION_BADCASE_SUMMARY.md](docs/GENERATION_EVALUATION_BADCASE_SUMMARY.md)。本次修复后尚未重新调用真实模型，仓库内报告仍明确为 **not_run**，不含虚构的模型指标或人工结论；见 [GENERATION_EVALUATION_REPORT.md](docs/GENERATION_EVALUATION_REPORT.md)。人工复核覆盖所有自动失败题，加上至少 20% “已调用 LLM 且自动通过”的题；九道硬安全门题不计入生成抽样，由独立安全门测试保证。
 
 ## 已知限制
 
 - `MIN_RELEVANCE=0.60` 是当前小型保留集上的暂用值，不是长期固定阈值；资料、模型或流量分布变化后需要重跑保留评估。明确属性保护仍是保守词表，而非通用字段级事实验证。
 - BM25 与 RRF 仅作为可配置的离线对照实现，未因本次实验改为默认；尚未实现 Rerank、MCP、多模态、Dashboard 或复杂评测体系。
-- 真实 LLM 生成评估只能在本地 `.env` 已配置时显式运行；自动规则不是 LLM Judge 或绝对真相，完成全部失败题和 20% 通过题的人工复核前，不能判定达到独立演示门槛。
+- 真实 LLM 生成评估只能在本地 `.env` 已配置时显式运行；自动规则不是 LLM Judge 或绝对真相。模型必须以结构化 `used_source_ids` 引用当次证据，后端只返回验证过的来源；格式或引用无效会转人工。完成全部失败题和 20% 有模型回答的通过题的人工复核前，不能判定达到独立演示门槛。
 - 当前硬规则会把库存、具体/实时交期、订单级/批量/经销报价，以及食品保质期、配料、过敏原转人工；“微波炉”只在命中明确写有该事实的商品资料时回答。
 - 公开展示价不是经销价、批量价或订单级最终报价。任何未被当前资料覆盖的信息一律转人工。
 
