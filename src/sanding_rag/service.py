@@ -121,8 +121,16 @@ class RAGAnswerService:
 
     @staticmethod
     def _format_context(evidence_by_id: dict[str, RetrievedChunk]) -> str:
+        """Expose only public evidence labels, never routing or retrieval internals."""
         return "\n\n".join(
-            "\n".join((f"[{source_id}]", "公开证据：", match.text))
+            "\n".join(
+                (
+                    f"[{source_id}]",
+                    f"商品名称：{str(match.metadata['product_name'])}",
+                    "公开证据：",
+                    match.text,
+                )
+            )
             for source_id, match in evidence_by_id.items()
         )
 
