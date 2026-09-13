@@ -1,12 +1,16 @@
 # 叁鼎芯供应链商品知识助手（RAG MVP）
 
-这是围绕供应链商品咨询重新设计的第一阶段 RAG 项目。业务场景覆盖采购客户的商品参数、定制、起订量、交期说明与售后，以及供应商入驻和经销商合作咨询。它借鉴了“规格先行、模块分层、按闭环迭代”的工程方法，但没有复制参考项目的业务实现、MCP、BM25、RRF、Rerank、多模态或 Dashboard 代码。
+这是围绕商城目录商品咨询重新设计的第一阶段 RAG 项目。它采用独立的 Markdown 知识资料、可替换 Embedding 和本地 Chroma，回答已公开的商品信息与平台合作入口，并返回可核查来源。
 
-## 已实现范围
+v0.1 早期的 SDX 电子产品资料仅用于验证技术链路；它们不是商城业务资料，已从当前知识库、测试集和本地索引中移除。当前版本使用商城目录资料，未被资料覆盖的信息一律转人工，不把推断当作商品事实或平台承诺。
+
+## 当前 RAG 链路
 
 `Markdown 导入 → 自研结构/递归切分 → Metadata → Embedding → Chroma → Top-K 检索 → LLM 受控回答 + 来源`
 
-知识范围覆盖商品咨询、定制、起订量、交期说明、售后、供应商入驻与经销商合作。所有涉及库存、实时交期或最终报价的请求，都会在进入 LLM 前固定转人工。没有检索结果或低于相关性阈值时也会转人工；但“语义相近、分数偏高而实际证据不足”的阈值保护仍在完善，详见已知限制。
+第一批知识覆盖 10 个商城商品与 1 份平台合作说明：产地、包装、已公开展示价、已写明规格、起订量、定制或微波炉适用性等。资料只有在目录明确展示时才写入；不能据此回答库存、具体发货日期、订单级/批量/经销报价、食品保质期/配料/过敏原，或其他未公开的材质、认证与售后承诺。
+
+平台合作资料只说明：有供应商入驻入口、有经销商申请入口，以及批量采购可申请经销价与专属采购入口。入驻材料、审批时间和实际批量价没有公开依据，固定转人工。
 
 ## 快速运行
 
@@ -23,10 +27,10 @@ cp .env.example .env
 
 ```bash
 PYTHONPATH=src python -m sanding_rag.cli ingest data/sample
-PYTHONPATH=src python -m sanding_rag.cli ask "SDX-ISO-485A 适用什么供电电压？"
+PYTHONPATH=src python -m sanding_rag.cli ask "景德镇青花龙纹瓷盘的起订量是多少？"
 ```
 
-安装为 editable package 后也可使用 `sanding-rag` 命令。上面的 `PYTHONPATH=src` 写法可直接从检出目录运行，适用于包含空格或同步盘路径的本地环境。
+安装为 editable package 后也可使用 `sanding-rag` 命令。`PYTHONPATH=src` 写法可直接从检出目录运行，适用于包含空格或同步盘路径的本地环境。
 
 首次使用 `sentence_transformers` 时会下载 `BAAI/bge-small-zh-v1.5`。若仅需离线演示与验收（不是生产语义模型），可使用确定性测试模式：
 
@@ -37,16 +41,16 @@ python scripts/run_acceptance.py
 ## 命令
 
 ```bash
-# 摄取任一 Markdown 文件或目录；front matter 必须包含四个业务 Metadata 字段
+# 摄取 Markdown 文件或目录；front matter 必须包含五个业务 Metadata 字段
 sanding-rag ingest path/to/markdown-or-directory
 
-# 问答；输出 JSON，其中 sources 为来源列表
+# 问答；输出 JSON，其中 sources 包含目录来源 URL
 sanding-rag ask "问题"
 
-# 本地可重复的 10 题验收，采用测试 Embedding 与测试 LLM，不需要 API Key
+# 18 题可重复验收，采用测试 Embedding 与测试 LLM，不需要 API Key
 python scripts/run_acceptance.py
 
-# 以真实本地中文语义 Embedding 跑同一组十题（模型已下载时可离线运行）
+# 以真实本地中文语义 Embedding 跑同一组题目（模型已下载时可离线运行）
 python scripts/run_acceptance.py --semantic
 
 # 基础单元测试（标准库 unittest）
@@ -55,28 +59,25 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 ## 测试集与当前结果
 
-`data/test_questions.json` 包含 10 道脱敏代表性题目：3 道商品规格、1 道定制、1 道 MOQ、1 道售后、供应商/经销商各 1 道，以及库存/报价与实时到货各 1 道风险题。
+`data/test_questions.json` 含 18 道商城目录验收题：10 个商品的产地、包装、公开展示价或已写明规格/起订量，平台合作入口，未公开经销价、食品资料缺口、非玲珑瓷的微波炉问题、库存、具体发货日期和订单级报价。当前离线验收与 `BAAI/bge-small-zh-v1.5` 语义验收均为 **18/18 通过**，基础单元测试为 **6/6 通过**；详细记录见 [TEST_RESULTS.md](docs/TEST_RESULTS.md)。
 
-- `python scripts/run_acceptance.py`：Chroma + 离线确定性测试 Embedding + 测试 LLM，**10/10 通过**。
-- `python scripts/run_acceptance.py --semantic`：Chroma + `BAAI/bge-small-zh-v1.5`，**10/10 通过**；生成边界仍使用测试 LLM，因为仓库不含也不应包含真实 API Key。
-- `PYTHONPATH=src python -m unittest discover -s tests -v`：**6/6 通过**。
-
-完整记录见 [TEST_RESULTS.md](docs/TEST_RESULTS.md)。这些结果验证摄取、检索来源和安全门；不代表真实 LLM 的回答质量基准。
+验收使用真实 Chroma 接口、样例 Markdown 和完整的导入/切分/向量检索/安全门/来源返回链路；离线模式注入 `HashingTestEmbedder` 与 `ContextEchoLLM`，所以它验证闭环、来源和安全策略，不构成真实 LLM 的回答质量基准。
 
 ## 已知限制
 
-- 尚未完成“语义近似但证据不足”的阈值保护校准；生产上线前应引入拒答测试集和更严格的证据充分性判定。
+- 尚未完成“语义近似但证据不足”的通用阈值保护校准；生产上线前应补充拒答测试集和更严格的证据充分性判定。
 - 尚未实现 BM25、RRF、Rerank、MCP、多模态、Dashboard 或复杂评测体系。
-- 静态资料不能给出库存、实时交期或最终报价；这些请求固定转人工。
-- 当前样例均为模拟或脱敏资料，不能作为真实商品、合作条款或售后承诺。
+- 当前硬规则会把库存、具体/实时交期、订单级/批量/经销报价，以及食品保质期、配料、过敏原转人工；“微波炉”只在命中明确写有该事实的商品资料时回答。
+- 公开展示价不是经销价、批量价或订单级最终报价。任何未被当前资料覆盖的信息一律转人工。
 
 ## 目录
 
 ```text
 src/sanding_rag/      核心代码（无参考项目业务代码）
-data/sample/          3 份脱敏商品资料 + 规则 + FAQ
+data/sample/          10 份商城商品资料 + 平台合作说明
+data/test_questions.json  18 道商城目录验收题
 docs/                 产品、技术规格、模块设计与验收报告
-scripts/              可重复的 10 题验收脚本
+scripts/              可重复验收脚本
 tests/                轻量单元测试
 ```
 

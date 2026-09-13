@@ -6,7 +6,7 @@ from dataclasses import asdict, dataclass
 from typing import Any
 
 
-REQUIRED_METADATA = ("source", "product_id", "document_type", "updated_at")
+REQUIRED_METADATA = ("source", "source_url", "product_id", "document_type", "updated_at")
 
 
 @dataclass(frozen=True)
@@ -33,6 +33,7 @@ class RetrievedChunk:
         """Return only fields that can be shown to an operator or caller."""
         return {
             "source": self.metadata["source"],
+            "source_url": self.metadata["source_url"],
             "product_id": self.metadata["product_id"],
             "document_type": self.metadata["document_type"],
             "updated_at": self.metadata["updated_at"],

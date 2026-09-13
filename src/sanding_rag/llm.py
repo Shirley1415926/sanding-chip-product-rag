@@ -69,5 +69,11 @@ class ContextEchoLLM:
     def answer(self, question: str, context: str, handoff_message: str) -> str:
         if not context.strip():
             return handoff_message
-        first_evidence = context.split("\n\n", maxsplit=1)[0]
-        return f"根据已检索资料：{first_evidence[:360]}"
+        # Omit only the orchestration headers. Joining every retrieved chunk is
+        # important because a Markdown title and its facts may be split apart.
+        evidence_body = "\n".join(
+            line
+            for line in context.splitlines()
+            if not line.startswith("[证据 ") and not line.startswith("product_id=")
+        )
+        return f"根据已检索资料：{evidence_body[:360]}"

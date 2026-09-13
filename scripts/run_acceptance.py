@@ -1,4 +1,4 @@
-"""Run the product's ten representative questions in repeatable offline test mode."""
+"""Run marketplace catalog acceptance questions in repeatable offline test mode."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from sanding_rag.splitter import SemanticRecursiveSplitter  # noqa: E402
 
 
 def _arguments() -> object:
-    parser = ArgumentParser(description="Run the ten RAG acceptance questions")
+    parser = ArgumentParser(description="Run the marketplace RAG acceptance questions")
     parser.add_argument(
         "--semantic",
         action="store_true",
@@ -53,9 +53,13 @@ def main() -> int:
             payload = service.ask(case["question"])
             sources = payload.sources
             passed = payload.handoff_required if case["expect"] == "handoff" else not payload.handoff_required
+            if case["expect"] == "handoff" and case.get("handoff_reason"):
+                passed = bool(passed and payload.handoff_reason == case["handoff_reason"])
             if case["expect"] == "answer":
                 source_text = " ".join(str(source["source"]) for source in sources)
                 passed = bool(passed and sources and case["source_contains"] in source_text)
+                if case.get("answer_contains"):
+                    passed = bool(passed and case["answer_contains"] in payload.answer)
             results.append(
                 {
                     "id": case["id"],
@@ -63,6 +67,7 @@ def main() -> int:
                     "expected": case["expect"],
                     "actual": "handoff" if payload.handoff_required else "answer",
                     "sources": [source["source"] for source in sources],
+                    "source_urls": [source["source_url"] for source in sources],
                     "handoff_reason": payload.handoff_reason,
                     "passed": passed,
                 }
